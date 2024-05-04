@@ -52,9 +52,24 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                             <a href="#" class="nav-link">Soporte</a>
                         </li>
                     </ul>
-                    <a href="checkout.php" class="btn btn-primary">
+                    <a href="checkout.php" class="btn btn-primary me-2">
                         Carrito<span id="num_cart" class="badge bg-secondary"><?php echo $num_cart; ?></span>
                     </a>
+                    <?php if (isset($_SESSION['user_id'])) { ?>
+                        <div class="dropdown">
+                            <button class="btn btn-success dropdown-toggle" type="button" id="btn_session" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user"></i> &nbsp; <?php echo $_SESSION['user_name']; ?>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="btn_session">
+                                <li><a class="dropdown-item" href="compras.php">Mis compras</a></li>
+                                <li><a class="dropdown-item" href="logout.php">Cerrar sesión</a></li>
+                            </ul>
+                        </div>
+                    <?php } else { ?>
+                        <a href="login.php" class="btn btn-success">
+                            <i class="fas fa-user"></i> Ingresar
+                        </a>
+                    <?php } ?>
                 </div>
             </div>
         </div>

@@ -105,8 +105,6 @@ function activarUsuario($id, $con)
     return $sql->execute([$id]);
 }
 
-/*
-
 function login($usuario, $password, $con, $proceso)
 {
     $sql = $con->prepare("SELECT id, usuario, password, id_cliente FROM usuarios WHERE usuario LIKE ? LIMIT 1");
@@ -141,6 +139,8 @@ function esActivo($usuario, $con)
     }
     return false;
 }
+
+/*
 
 function solicitaPassword($user_id, $con)
 {
