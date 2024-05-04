@@ -80,7 +80,7 @@ if ($productos != null) {
                     <tbody>
                         <?php
                         if ($lista_carrito == null) {
-                            echo '<tr><td colspan="5" class="text-center"><b>Lista vacia</b></td></tr>';
+                            echo '<tr><td colspan="5" class="text-center"><b>No tienes ningún artículo en tu carrito de compras.</b></td></tr>';
                         } else {
                             $total = 0;
                             foreach ($lista_carrito as $producto) {
@@ -120,9 +120,7 @@ if ($productos != null) {
             <?php if ($lista_carrito != null) { ?>
                 <div class="row">
                     <div class="col-md-5 offset-md-7 d-grid gap-2">
-                        <?php if (isset($_SESSION['user_cliente'])) { ?>
-                            <a href="pago.php" class="btn btn-primary btn-lg">Realizar pago</a>
-                        <?php } ?>
+                        <a href="pago.php" class="btn btn-primary btn-lg">Realizar pago</a>
                     </div>
                 </div>
             <?php } ?>
@@ -137,7 +135,7 @@ if ($productos != null) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ¿Desea eliminar el producto de la lista?
+                    Desea eliminar el producto de la lista?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

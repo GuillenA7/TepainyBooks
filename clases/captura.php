@@ -8,9 +8,9 @@ $con = $db->conectar();
 $json = file_get_contents('php://input');
 $datos = json_decode($json, true);
 
-echo '<pre>';
+/* echo '<pre>';
 print_r($datos);
-echo '</pre>';
+echo '</pre>'; */
 
 if (is_array($datos)) {
 
@@ -35,7 +35,7 @@ if (is_array($datos)) {
         
                 $sql = $con->prepare("SELECT id, nombre, precio, descuento FROM productos WHERE id=? AND activo=1");
                 $sql->execute([$clave]);
-                $row_prod[] = $sql->fetch(PDO::FETCH_ASSOC);
+                $row_prod = $sql->fetch(PDO::FETCH_ASSOC);
 
                 $precio = $row_prod['precio'];
                 $descuento = $row_prod['descuento'];
@@ -44,6 +44,7 @@ if (is_array($datos)) {
                 $sql_insert = $con->prepare("INSERT INTO detalle_compra (id_compra, id_producto, nombre, precio, cantidad) VALUES (?,?,?,?,?)")
                 $sql_insert->execute([$id, $clave, $row_prod['nombre'], $precio_desc, $cantidad]);
             }
+            include 'enviar_email.php';
         }
         unset($_SESSION['carrito']);
     }

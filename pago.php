@@ -1,18 +1,20 @@
 <?php
 
 require 'config/config.php';
-require 'config/database.php'
+require 'config/database.php';
+$db = new Database();
+$con = $db->conectar();
 
 $productos = isset($_SESSION['carrito']['productos']) ? $_SESSION['carrito']['productos'] : null;
 
-$db = new Database();
-$con = $db->conectar();
+//print_r($_SESSION);
 
 $lista_carrito = array();
 
 if ($productos != null) {
-    foreach ($productos as $clave => $producto) {
-        $sql = $con->prepare("SELECT id, nombre, precio, descuento, $producto AS cantidad FROM productos WHERE id=? AND activo=1");
+    foreach ($productos as $clave => $cantidad) {
+
+        $sql = $con->prepare("SELECT id, nombre, precio, descuento, $cantidad AS cantidad FROM productos WHERE id=? AND activo=1");
         $sql->execute([$clave]);
         $lista_carrito[] = $sql->fetch(PDO::FETCH_ASSOC);
     }
@@ -20,6 +22,7 @@ if ($productos != null) {
     header("Location: index.php");
     exit;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="es" class="h-100">
@@ -29,8 +32,6 @@ if ($productos != null) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TepainyBooks</title>
-
-    <script src="https://www.paypal.com/sdk/js?client-id=AVY1j-RdBnlFoF2LnPT4gvkGu1-FyOtDVp-SgyzARzrUe8atAoOztdVPSOR-s0DXBTl8sUwjhd1ac3fA&currency=MXN"></script>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -110,15 +111,6 @@ if ($productos != null) {
                                         $subtotal = $cantidad * $precio_desc;
                                         $total += $subtotal;
 
-                                        $item = new MercadoPago\Item();
-                                        $item->id = $producto['id'];
-                                        $item->title = $producto['nombre'];
-                                        $item->quantity = $cantidad;
-                                        $item->unit_price = $precio_desc;
-                                        $item->currency_id = CURRENCY;
-
-                                        array_push($productos_mp, $item);
-                                        unset($item);
                                 ?>
                                         <tr>
                                             <td><?php echo $producto['nombre']; ?></td>
@@ -145,7 +137,7 @@ if ($productos != null) {
     <!-- Option 1: Bootsrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-    <script src="https://www.paypal.com/sdk/js?client-id=<?php echo CLIENT_ID; ?></php> &currency=<?php echo CURRENCY; ?>"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=<?php echo CLIENT_ID; ?>&currency=<?php echo CURRENCY; ?>"></script>
 
     <script>
         paypal.Buttons({
@@ -162,28 +154,27 @@ if ($productos != null) {
                         amount: {
                             value: <?php echo $total; ?>
                         },
-                        description: 'Compra tienda CDP'
+                        description: 'Compra tienda'
                     }]
                 });
             },
 
             onApprove: function(data, actions) {
+                let URL = 'clases/captura.php'
+                actions.order.capture().then(function(detalles) {
+                    
+                    console.log(detalles)
 
-                let url = 'clases/captura.php';
-                actions.order.capture().then(function(details) {
-
-                    let trans = details.purchase_units[0].payments.captures[0].id;
                     return fetch(url, {
                         method: 'post',
-                        mode: 'cors',
                         headers: {
                             'content-type': 'application/json'
                         },
                         body: JSON.stringify({
-                            details: details
+                            detalles: detalles
                         })
                     }).then(function(response) {
-                        window.location.href = "completado.php?key=" + trans;
+                        window.location.href = "completado.php?key=" + detalles['id'];
                     });
                 });
             },
