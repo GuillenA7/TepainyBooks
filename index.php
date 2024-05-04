@@ -1,3 +1,19 @@
+<?php
+
+require 'config/database.php';
+$db = new Database();
+$con = $db->conectar();
+
+$sql = $con->prepare("SELECT id, nombre, precio FROM productos WHERE activo=1");
+$sql->execute();
+$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+//session_destroy();
+
+//print_r($_SESSION);
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -43,81 +59,32 @@
     <main>
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="images/productos/1/principal.jpg">
-                        <div class="card-body">
-                            <p class="card-text">Libro 1</p>
-                            <h5 class="card-tittle">$100.00</h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a href="details.php" class="btn btn-primary">Detalles</a>
+            <?php foreach($resultado as $row) { ?>
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <?php
+
+                            $id = $row['id'];
+                            $imagen = "images/productos/" . $id . "/principal.jpg";
+
+                            if (!file_exists($imagen)) {
+                                $imagen = "images/no-photo.jpg";
+                            }
+                            ?>
+                            <img src="<?php echo $imagen; ?>">
+                            <div class="card-body">
+                                <p class="card-text"><?php echo $row['nombre']; ?></p>
+                                <h5 class="card-tittle">$<?php echo number_format($row['precio'], 2, '.', ','); ?></h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="details.php?" class="btn btn-primary">Detalles</a>
+                                    </div>
+                                    <button class="btn btn-outline-success" type="button">Agregar al carrito</button>
                                 </div>
-                                <a class="btn btn-outline-success" type="button">Agregar al carrito</a>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="images/productos/1/principal.jpg">
-                        <div class="card-body">
-                            <p class="card-text">Libro 1</p>
-                            <h5 class="card-tittle">$100.00</h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a href="details.php" class="btn btn-primary">Detalles</a>
-                                </div>
-                                <a class="btn btn-outline-success" type="button">Agregar al carrito</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="images/productos/1/principal.jpg">
-                        <div class="card-body">
-                            <p class="card-text">Libro 1</p>
-                            <h5 class="card-tittle">$100.00</h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a href="details.php" class="btn btn-primary">Detalles</a>
-                                </div>
-                                <a class="btn btn-outline-success" type="button">Agregar al carrito</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="images/productos/1/principal.jpg">
-                        <div class="card-body">
-                            <p class="card-text">Libro 1</p>
-                            <h5 class="card-tittle">$100.00</h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a href="details.php" class="btn btn-primary">Detalles</a>
-                                </div>
-                                <a class="btn btn-outline-success" type="button">Agregar al carrito</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="images/productos/1/principal.jpg">
-                        <div class="card-body">
-                            <p class="card-text">Libro 1</p>
-                            <h5 class="card-tittle">$100.00</h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a href="details.php" class="btn btn-primary">Detalles</a>
-                                </div>
-                                <a class="btn btn-outline-success" type="button">Agregar al carrito</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </main>
