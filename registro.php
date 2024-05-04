@@ -20,25 +20,6 @@ if (!empty($_POST)) {
     $password = trim($_POST['password']);
     $repassword = trim($_POST['repassword']);
 
-    $id = registraCliente([$nombres, $apellidos, $email, $telefono, $dni], $con);
-
-    if ($id > 0) {
-        $pass_hash = password_hash($password, PASSWORD_DEFAULT);
-        $token = generarToken();
-        if (!registraUsuario([$usuario, $pass_hash, $token, $id], $con)) {
-            $errors[] = 'Error al registrar usuario';
-        }
-    } else {
-        $errors[] = 'Error al registrar cliente';
-    }
-
-    if(count($errors) == 0){
-
-    } else {
-        print_r($errors);
-    }
-/*
-
     if (esNulo([$nombres, $apellidos, $email, $telefono, $dni, $usuario, $password, $repassword])) {
         $errors[] = "Debe llenar todos los campos";
     }
@@ -58,6 +39,23 @@ if (!empty($_POST)) {
     if (emailExiste($email, $con)) {
         $errors[] = "El correo electrónico $email ya existe";
     }
+
+    if (count($errors) == 0) {
+
+        $id = registraCliente([$nombres, $apellidos, $email, $telefono, $dni], $con);
+
+        if ($id > 0) {
+            $pass_hash = password_hash($password, PASSWORD_DEFAULT);
+            $token = generarToken();
+            if (!registraUsuario([$usuario, $pass_hash, $token, $id], $con)) {
+                $errors[] = 'Error al registrar usuario';
+            }
+        } else {
+            $errors[] = 'Error al registrar cliente';
+        }
+    }
+
+/*
 
     if (empty($errors)) {
 
@@ -143,10 +141,12 @@ if (!empty($_POST)) {
         <div class="container p-3">
         <h3>Datos del cliente</h3>
 
+        <?php mostrarMensajes($errors); ?>
+
             <form class="row g-3" action="registro.php" method="post" autocomplete="off">
                 <div class="col-md-6">
                     <label for="nombres"><span class="text-danger">*</span> Nombres</label>
-                    <input type="text" name="nombres" id="nombres" class="form-control" required>
+                    <input type="text" name="nombres" id="nombres" class="form-control" value="<?= $nombres; ?>" required>
                 </div>
                 <div class="col-md-6">
                     <label for="apellidos"><span class="text-danger">*</span> Apellidos</label>
