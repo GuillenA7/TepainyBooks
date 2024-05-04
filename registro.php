@@ -45,23 +45,6 @@ if (!empty($_POST)) {
         $id = registraCliente([$nombres, $apellidos, $email, $telefono, $dni], $con);
 
         if ($id > 0) {
-            $pass_hash = password_hash($password, PASSWORD_DEFAULT);
-            $token = generarToken();
-            if (!registraUsuario([$usuario, $pass_hash, $token, $id], $con)) {
-                $errors[] = 'Error al registrar usuario';
-            }
-        } else {
-            $errors[] = 'Error al registrar cliente';
-        }
-    }
-
-/*
-
-    if (empty($errors)) {
-
-        $id = registraCliente([$nombres, $apellidos, $email, $telefono, $dni], $con);
-
-        if ($id > 0) {
 
             require 'clases/Mailer.php';
             $mailer = new Mailer();
@@ -87,8 +70,8 @@ if (!empty($_POST)) {
             $errors[] = "Error al registrar cliente";
         }
     }
-    */
 }
+
 
 ?>
 <!DOCTYPE html>

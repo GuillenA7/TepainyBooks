@@ -81,8 +81,6 @@ function mostrarMensajes(array $errors)
     }
 }
 
-/*
-
 function validaToken($id, $token, $con)
 {
     $msg = "";
@@ -106,6 +104,8 @@ function activarUsuario($id, $con)
     $sql = $con->prepare("UPDATE usuarios SET activacion = 1, token = '' WHERE id = ?");
     return $sql->execute([$id]);
 }
+
+/*
 
 function login($usuario, $password, $con, $proceso)
 {
