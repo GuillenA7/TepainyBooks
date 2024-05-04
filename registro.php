@@ -146,7 +146,7 @@ if (!empty($_POST)) {
             <form class="row g-3" action="registro.php" method="post" autocomplete="off">
                 <div class="col-md-6">
                     <label for="nombres"><span class="text-danger">*</span> Nombres</label>
-                    <input type="text" name="nombres" id="nombres" class="form-control" value="<?= $nombres; ?>" required>
+                    <input type="text" name="nombres" id="nombres" class="form-control" required>
                 </div>
                 <div class="col-md-6">
                     <label for="apellidos"><span class="text-danger">*</span> Apellidos</label>
@@ -195,6 +195,61 @@ if (!empty($_POST)) {
 
     <!-- Option 1: Bootstrap Bundle with Pooper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <script>
+        let txtUsuario = document.getElementById('usuario')
+        txtUsuario.addEventListener("blur", function() {
+            existeUsuario(txtUsuario.value)
+        }, false)
+
+        let txtEmail = document.getElementById('email')
+        txtEmail.addEventListener("blur", function() {
+            existeEmail(txtEmail.value)
+        }, false)
+
+        function existeEmail(email) {
+            let url = "clases/clienteAjax.php"
+            let formData = new FormData()
+            formData.append("action", "existeEmail")
+            formData.append("email", email)
+
+            fetch(url, {
+                    method: 'POST',
+                    body: formData
+                }).then(response => response.json())
+                .then(data => {
+
+                    if (data.ok) {
+                        document.getElementById('email').value = ''
+                        document.getElementById('validaEmail').innerHTML = 'Email no disponible'
+                    } else {
+                        document.getElementById('validaEmail').innerHTML = ''
+                    }
+
+                })
+        }
+
+        function existeUsuario(usuario) {
+            let url = "clases/clienteAjax.php"
+            let formData = new FormData()
+            formData.append("action", "existeUsuario")
+            formData.append("usuario", usuario)
+
+            fetch(url, {
+                    method: 'POST',
+                    body: formData
+                }).then(response => response.json())
+                .then(data => {
+
+                    if (data.ok) {
+                        document.getElementById('usuario').value = ''
+                        document.getElementById('validaUsuario').innerHTML = 'Usuario no disponible'
+                    } else {
+                        document.getElementById('validaUsuario').innerHTML = ''
+                    }
+                })
+        }
+    </script>
 
 </body>
 
