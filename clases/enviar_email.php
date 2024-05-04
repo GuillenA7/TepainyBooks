@@ -21,13 +21,13 @@ try {
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com';                     //Configure el servidor SMTP para enviar
     $mail->SMTPAuth   = true;                          // Habilita la autenticación SMTP
-    $mail->Username   = 'noreply@adrianguillen2004.com';                     //Usuario SMTP
-    $mail->Password   = 'GuillenA7';                     //Contraseña SMTP
+    $mail->Username   = 'adrianguillen2004@gmail.com';                     //Usuario SMTP
+    $mail->Password   = '';                     //Contraseña SMTP
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //Habilitar el cifrado TLS
     $mail->Port       = 465;                     //Puerto TCP al que conectarse, si usa 587 agregar `SMTPSecure = PHPMailer :: ENCRYPTION_STARTTLS`
 
     //Correo emisor y nombre
-    $mail->setFrom('noreply@adrianguillen2004.com', 'TepainyBooks');
+    $mail->setFrom('adrianguillen2004@gmail.com', 'TepainyBooks');
     //Correo receptor y nombre
     $mail->addAddress("theendjmaster@outlook.com", 'Adrian');
 
