@@ -53,7 +53,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                         </li>
                     </ul>
                     <a href="checkout.php" class="btn btn-primary me-2">
-                        Carrito<span id="num_cart" class="badge bg-secondary"><?php echo $num_cart; ?></span>
+                        <i class="fas fa-shopping-cart"></i> Carrito <span id="num_cart" class="badge bg-secondary"><?php echo $num_cart; ?></span>
                     </a>
                     <?php if (isset($_SESSION['user_id'])) { ?>
                         <div class="dropdown">

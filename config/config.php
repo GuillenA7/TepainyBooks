@@ -42,7 +42,7 @@ define("KEY_TOKEN", "APR.wqc-354*");
 define("MAIL_HOST", "smtp.gmail.com");
 define("MAIL_USER", "adrianguillen2004@gmail.com");
 define("MAIL_PASS", "");
-define("MAIL_PORT", "465");
+define("MAIL_PORT", "587");
 
 // Sesión para tienda
 session_name('ecommerce_session');

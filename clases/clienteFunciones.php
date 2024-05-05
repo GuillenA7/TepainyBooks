@@ -140,8 +140,6 @@ function esActivo($usuario, $con)
     return false;
 }
 
-/*
-
 function solicitaPassword($user_id, $con)
 {
     $token = generarToken();
@@ -171,4 +169,3 @@ function actualizaPassword($user_id, $password, $con)
     }
     return false;
 }
-*/
