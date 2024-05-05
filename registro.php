@@ -55,7 +55,7 @@ if (!empty($_POST)) {
             if ($idUsuario > 0) {
 
                 $url = SITE_URL . 'activa_cliente.php?id=' . $idUsuario . '&token=' . $token;
-                $asunto = "Activar cuenta - Tienda online";
+                $asunto = "Quiero hola";
                 $cuerpo = "Estimado $nombres: <br> Para continuar con el proceso de registro es indispensable de clic en la siguiente liga <a href='$url'>Activar cuenta</a>";
 
                 if ($mailer->enviarEmail($email, $asunto, $cuerpo)) {
