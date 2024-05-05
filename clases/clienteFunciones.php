@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Funciones de utilidad para usuarios
+ * Adrian Guillen
+ * 22310361
+ */
+
 function esNulo(array $parametos)
 {
     foreach ($parametos as $parameto) {
@@ -33,7 +39,7 @@ function generarToken()
 
 function registraCliente(array $datos, $con)
 {
-    $sql = $con->prepare("INSERT INTO clientes (nombres, apellidos, email, telefono, dni, estatus, fecha_alta) VALUES(?,?,?,?,?, 1, now())");
+    $sql = $con->prepare("INSERT INTO clientes (nombres, apellidos, email, telefono, dni,estatus, fecha_alta) VALUES(?,?,?,?,?, 1, now())");
     if ($sql->execute($datos)) {
         return $con->lastInsertId();
     }
@@ -69,9 +75,9 @@ function emailExiste($email, $con)
     return false;
 }
 
-function mostrarMensajes(array $errors)
+function mostrarMensajes($errors = [])
 {
-    if (count($errors) > 0) {
+    if (!empty($errors)) {
         echo '<div class="alert alert-warning alert-dismissible fade show" role="alert"><ul>';
         foreach ($errors as $error) {
             echo '<li>' . $error . '</li>';

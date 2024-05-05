@@ -7,6 +7,8 @@ require 'clases/clienteFunciones.php';
 $db = new Database();
 $con = $db->conectar();
 
+$proceso = isset($_GET['pago']) ? 'pago' : 'login';
+
 $errors = [];
 
 if (!empty($_POST)) {
@@ -22,7 +24,6 @@ if (!empty($_POST)) {
     if (empty($errors)) {
         $errors[] = login($usuario, $password, $con, $proceso);
     }
-    
 }
 
 
