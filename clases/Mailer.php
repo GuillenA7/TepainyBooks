@@ -42,7 +42,7 @@ class Mailer
             $mail->Subject = $asunto; //Titulo del correo
 
             //Cuerpo del correo
-            $mail->Body = utf8_decode($cuerpo);
+            $mail->Body = mb_convert_encoding($cuerpo, 'ISO-8859-1', 'UTF-8');
             $mail->setLanguage('es', '../phpmailer/language/phpmailer.lang.es.php');
 
             //Enviar correo
