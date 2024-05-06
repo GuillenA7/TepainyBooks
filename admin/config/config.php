@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 /**
  * URL de la tienda
  *

@@ -1,5 +1,9 @@
-<?php include 'config/config.php'; ?>
-<?php include 'header.php'; ?>
+<?php
+
+require 'config/config.php';
+include 'header.php';
+
+?>
 <main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Dashboard</h1>

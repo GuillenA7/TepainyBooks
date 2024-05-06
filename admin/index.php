@@ -6,9 +6,9 @@
  * 22310361
  */
 
-require_once 'config/database.php';
-//require_once 'config/config.php';
-require_once 'clases/adminFunciones.php';
+require 'config/database.php';
+require 'config/config.php';
+require 'clases/adminFunciones.php';
 
 $db = new Database();
 $con = $db->conectar();

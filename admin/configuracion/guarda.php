@@ -1,9 +1,9 @@
 <?php
 
-require_once '../config/database.php';
-require_once '../config/config.php';
-require_once '../clases/cifrado.php';
-require_once '../header.php';
+require '../config/database.php';
+require '../config/config.php';
+require '../clases/cifrado.php';
+require '../header.php';
 
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
     header('Location: ../index.php');

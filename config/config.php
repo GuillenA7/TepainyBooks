@@ -45,13 +45,13 @@ define("METODO_CIFRADO", "aes-128-cbc");
 /**
  * Simbolo de moneda
  */
-define("MONEDA", "$");
+define("MONEDA", $config["tienda_moneda"]);
 
 #--------------------------------------------------------------------
 # Configuración para Paypal
 #--------------------------------------------------------------------
-define("CLIENT_ID", "AVY1j-RdBnlFoF2LnPT4gvkGu1-FyOtDVp-SgyzARzrUe8atAoOztdVPSOR-s0DXBTl8sUwjhd1ac3fA");
-define("CURRENCY", "MXN");
+define("CLIENT_ID", $config['paypal_cliente']);
+define("CURRENCY", $config['paupal_moneda']);
 
 define("KEY_TOKEN", "APR.wqc-354*");
 

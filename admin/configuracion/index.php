@@ -1,9 +1,14 @@
 <?php
 
-require_once '../config/database.php';
-require_once '../config/config.php';
-require_once '../clases/cifrado.php';
-require_once '../header.php';
+require '../config/database.php';
+require '../config/config.php';
+require '../header.php';
+require '../clases/cifrado.php';
+
+if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
+    header('Location: ../index.php');
+    exit;
+}
 
 $db = new Database();
 $con = $db->conectar();
