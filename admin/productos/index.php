@@ -8,7 +8,6 @@
 
 require '../config/database.php';
 require '../config/config.php';
-require '../header.php';
 
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
     header('Location: ../index.php');
