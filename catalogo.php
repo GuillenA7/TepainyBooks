@@ -12,13 +12,28 @@ $db = new Database();
 $con = $db->conectar();
 
 $idCategoria = $_GET['cat'] ?? '';
+$orden = $_GET['orden'] ?? '';
+
+$orders = [
+    'asc' => 'nombre ASC',
+    'desc' => 'nombre DESC',
+    'precio_alto' => 'precio DESC',
+    'precio_bajo' => 'precio ASC',
+];
+
+$order = $orders[$orden] ?? '';
+$params = [];
 
 if (!empty($idCategoria)) {
-    $comando = $con->prepare("SELECT id, nombre, precio FROM productos WHERE activo=1 AND id_categoria = ? ");
+    $comando = $con->prepare("SELECT id, nombre, precio FROM productos WHERE activo=1 AND id_categoria = ? $order");
     $comando->execute([$idCategoria]);
 } else {
-    $comando = $con->prepare("SELECT id, nombre, precio FROM productos WHERE activo=1");
+    $comando = $con->prepare("SELECT id, nombre, precio FROM productos WHERE activo=1 $order");
     $comando->execute();
+}
+
+if (!empty($order)) {
+    $order .= " ORDER BY $order";
 }
 
 $sql = $con->prepare("SELECT id, nombre, precio FROM productos WHERE activo=1");
