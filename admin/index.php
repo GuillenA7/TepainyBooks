@@ -1,58 +1,111 @@
+<?php
+
+/**
+ * Pantalla para login de administración
+ * Adrian Guillen
+ * 22310361
+ */
+
+require 'config/database.php';
+//require 'config/config.php';
+require 'clases/adminFunciones.php';
+
+$db = new Database();
+$con = $db->conectar();
+
+/*$password = password_hash('admin', PASSWORD_DEFAULT);
+$sql = "INSERT INTO admin (usuario, password, nombre, email, activo, fecha_alta)
+VALUES ('admin','$password','Administrador','a22310361@ceti.mx','1',NOW())";
+$con->query($sql);*/
+
+$errors = [];
+
+if (!empty($_POST)) {
+    $usuario = trim($_POST['usuario']);
+    $password = trim($_POST['password']);
+
+    if (esNulo([$usuario, $password])) {
+        $errors[] = "Debe llenar todos los campos";
+    }
+
+    if (empty($errors)) {
+        $errors[] = login($usuario, $password, $con);
+    }
+}
+
+?>
 <!DOCTYPE html>
-<html lang="es" class="h-100">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TepainyBooks</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="author" content="Adrian" />
+    <title>Inicio de sesión - TepainyBooks</title>
+    <link href="css/styles.css" rel="stylesheet" />
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="css/estilos.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('images/background.jpg');
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 
-<body class="d-flex flex-column h-100">
+<body class="bg-aprimary bga-gradient">
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-header">
+                                    <h3 class="text-center font-weight-light my-2">Administración de tienda</h3>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="text-center font-weight-light mb-3">Iniciar sesión</h4>
+                                    <form action="index.php" method="post" autocomplete="off">
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" id="usuario" name="usuario" type="text" placeholder="usuario" autofocus required />
+                                            <label for="usuario">Usuario</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" id="password" name="password" type="password" placeholder="Contraseña" required />
+                                            <label for="password">Contraseña</label>
+                                        </div>
 
-    <!--Barra de navegación-->
+                                        <?php mostrarMensajes($errors); ?>
 
-    <header>
-        <div class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a href="#" class="navbar-brand">
-                    <strong>TepainyBooks</strong>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                
-                <div class="collapse navbar-collapse" id="navbarHeader">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link active">Catalogo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Soporte</a>
-                        </li>
-                    </ul>
-                    <a href="checkout.php" class="btn btn-primary">
-                        Carrito<span id="num_cart" class="badge bg-secondary"><?php echo $num_cart; ?></span>
-                    </a>
+                                        <div class="d-grid gap-3 col-12">
+                                            <button type="submit" class="btn btn-primary">Ingresar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </main>
         </div>
-    </header>
-
-    <!-- Contenido -->
-    <main class="flex-shrink-0">
-        <div class="container p-3">
-        
+        <div id="layoutAuthentication_footer">
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">
+                            <a>Adrian Guillen</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
-    </main>
-
-    <!-- Option 1: Bootstrap Bundle with Pooper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
 </body>
 
-</html> 
+</html>

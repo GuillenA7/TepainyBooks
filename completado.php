@@ -98,5 +98,9 @@ if ($id_transaccion == '') {
             <?php } ?>
         </div>
     </main>
+
+    <?php include 'footer.php'; ?>
+
 </body>
+
 </html>
