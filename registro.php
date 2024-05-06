@@ -1,8 +1,8 @@
 <?php
 
-require 'config/config.php';
-require 'config/database.php';
-require 'clases/clienteFunciones.php';
+require_once 'config/config.php';
+require_once 'config/database.php';
+require_once 'clases/clienteFunciones.php';
 
 $db = new Database();
 $con = $db->conectar();
@@ -46,7 +46,7 @@ if (!empty($_POST)) {
 
         if ($id > 0) {
 
-            require 'clases/Mailer.php';
+            require_once 'clases/Mailer.php';
             $mailer = new Mailer();
             $token = generarToken();
             $pass_hash = password_hash($password, PASSWORD_DEFAULT);

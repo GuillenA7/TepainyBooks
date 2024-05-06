@@ -1,7 +1,7 @@
 <?php
 
-require '../config/config.php';
-require '../config/database.php';
+require_once '../config/config.php';
+require_once '../config/database.php';
 
 $db = new Database();
 $con = $db->conectar();
@@ -45,7 +45,7 @@ if ($idTransaccion != '') {
             $cuerpo = "<h4>Gracias por su compra</h4>";
             $cuerpo .= '<p>El ID de su compra es: <b>' . $idTransaccion . '</b></p>';
 
-            require 'Mailer.php';
+            require_once 'Mailer.php';
             $mailer = new Mailer();
             $mailer->enviarEmail($email, $asunto, $cuerpo);
         }

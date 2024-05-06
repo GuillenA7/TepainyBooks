@@ -6,7 +6,7 @@
  * 22310361
  */
 
-require 'config/config.php';
+require_once 'config/config.php';
 
 session_destroy();
 

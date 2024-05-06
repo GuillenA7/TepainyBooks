@@ -1,7 +1,7 @@
 <?php
 
-require 'config/config.php';
-require 'config/database.php';
+require_once 'config/config.php';
+require_once 'config/database.php';
 
 $productos = isset($_SESSION['carrito']['productos']) ? $_SESSION['carrito']['productos'] : null;
 

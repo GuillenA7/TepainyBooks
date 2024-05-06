@@ -1,5 +1,24 @@
 <?php
 
+$path = dirname(__FILE__);
+
+require_once $path . '/database.php';
+require_once $path . '/../admin/clases/cifrado.php';
+
+$db = new Database();
+$con = $db->conectar();
+
+$sql = "SELECT nombre, valor FROM configuracion";
+$resultado = $con->query($sql);
+$datos = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+$config = [];
+
+foreach ($datos as $dato) {
+    $config[$dato['nombre']] = $dato['valor'];
+}
+
+
 #--------------------------------------------------------------------
 # Configuración del sistema
 #--------------------------------------------------------------------
@@ -39,10 +58,10 @@ define("KEY_TOKEN", "APR.wqc-354*");
 #--------------------------------------------------------------------
 # Datos para envio de correo electronico
 #--------------------------------------------------------------------
-define("MAIL_HOST", "smtp.gmail.com");
-define("MAIL_USER", "adrianguillen2004@gmail.com");
-define("MAIL_PASS", "");
-define("MAIL_PORT", "587");
+define("MAIL_HOST", $config['correo_smtp']);
+define("MAIL_USER", $config['correo_email']);
+define("MAIL_PASS", descifrar($config['correo_password']));
+define("MAIL_PORT", $config['correo_puerto']);
 
 // Sesión para tienda
 session_name('ecommerce_session');
