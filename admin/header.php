@@ -49,6 +49,11 @@
                             Configuración
                         </a>
 
+                        <a class="nav-link" href="<?php echo ADMIN_URL; ?>usuarios">
+                            <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
+                            Usuarios
+                        </a>
+
                         <a class="nav-link" href="<?php echo ADMIN_URL; ?>categorias">
                             <div class="sb-nav-link-icon"><i class="fas fa-layer-group"></i></div>
                             Categorías
