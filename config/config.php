@@ -33,7 +33,7 @@ define('SITE_URL', 'http://localhost/tepainybooks/');
 /**
  * Clave o contraseña para cifrado.
  */
-define("KEY_CIFRADO", "ABCD.1234-");
+//define("KEY_CIFRADO", "ABCD.1234-");
 
 /**
  * Metodo de cifrado OpenSSL.
@@ -51,7 +51,7 @@ define("MONEDA", $config["tienda_moneda"]);
 # Configuración para Paypal
 #--------------------------------------------------------------------
 define("CLIENT_ID", $config['paypal_cliente']);
-define("CURRENCY", $config['paupal_moneda']);
+define("CURRENCY", $config['paypal_moneda']);
 
 define("KEY_TOKEN", "APR.wqc-354*");
 
