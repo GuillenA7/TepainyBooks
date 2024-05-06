@@ -1,5 +1,5 @@
 <?php
-
+/*
 define('KEY_CIFRADO', 'ADASAD1*531-5S');
 define('METODO', 'aes-128-cbc');
 
@@ -20,3 +20,4 @@ function descifrar($input)
 
     return openssl_decrypt($cipher, METODO, KEY_CIFRADO, OPENSSL_RAW_DATA, $iv);
 }
+*/

@@ -56,7 +56,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                                     <div class="btn-group">
                                         <a href="details.php?id=<?php echo $row['id']; ?>&token=<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN); ?>" class="btn btn-primary">Detalles</a>
                                     </div>
-                                    <button class="btn btn-outline-success" type="button" onclick="addProducto(<?php echo $row['id']; ?>, '<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN); ?>')">Añadir al carrito</button>
+                                    <a class="btn btn-success" onClick="addProducto(<?php echo $row['id']; ?>)">Agregar</a>
                                 </div>
                             </div>
                         </div>
@@ -71,23 +71,28 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     <!-- Option 1: Bootstrap Bundle with Pooper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
-        function addProducto(id, token) {
-            let url = 'clases/carrito.php'
-            let formData = new FormData()
-            formData.append('id', id)
-            formData.append('token', token)
+        function addProducto(id) {
+            var url = 'clases/carrito.php';
+            var formData = new FormData();
+            formData.append('id', id);
 
             fetch(url, {
                     method: 'POST',
                     body: formData,
-                    mode: 'cors'
+                    mode: 'cors',
                 }).then(response => response.json())
                 .then(data => {
-                    if(data.ok){
+                    if (data.ok) {
                         let elemento = document.getElementById("num_cart")
-                        elemento.innerHTML = data.numero
+                        elemento.innerHTML = data.numero;
+                    } else {
+                        alert("No ay suficientes productos en el stock")
                     }
                 })
+        }
+
+        function submitForm() {
+            document.getElementById("ordenForm").submit();
         }
     </script>
 </body>

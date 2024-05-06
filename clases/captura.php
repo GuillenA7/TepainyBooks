@@ -1,14 +1,18 @@
 <?php
 
-require_once '../config/config.php';
-require_once '../config/database.php';
+/**
+ * Script para capturar detalles de pago de Paypal
+ * Adrian Guillen
+ * 22310361
+ */
+
+require '../config/config.php';
 
 $db = new Database();
 $con = $db->conectar();
 
 $json = file_get_contents('php://input');
 $datos = json_decode($json, true);
-
 
 if (is_array($datos)) {
 
@@ -31,8 +35,7 @@ if (is_array($datos)) {
     $comando->execute([$time, $status, $email, $idCliente, $monto, $idTransaccion, 'paypal']);
     $id = $con->lastInsertId();
 
-    if( $id > 0){
-
+    if ($id > 0) {
         $productos = isset($_SESSION['carrito']['productos']) ? $_SESSION['carrito']['productos'] : null;
 
         if ($productos != null) {
@@ -46,8 +49,10 @@ if (is_array($datos)) {
                 $descuento = $row_prod['descuento'];
                 $precio_desc = $precio - (($precio * $descuento) / 100);
 
-                $sql_insert = $con->prepare("INSERT INTO detalle_compra (id_compra, id_producto, nombre, precio, cantidad) VALUES (?,?,?,?,?)")
-                $sql_insert->execute([$id, $clave, $row_prod['nombre'], $precio_desc, $cantidad]);
+                $sql = $con->prepare("INSERT INTO detalle_compra (id_compra, id_producto, nombre, cantidad, precio) VALUES(?,?,?,?,?)");
+                if ($sql->execute([$id, $row_prod['id'], $row_prod['nombre'], $cantidad, $precio_desc])) {
+                    restarStock($row_prod['id'], $cantidad, $con);
+                }
             }
 
             $asunto = "Detalles de su pedido - TepainyBooks";
@@ -60,4 +65,10 @@ if (is_array($datos)) {
         }
         unset($_SESSION['carrito']);
     }
+}
+
+function restarStock($id, $cantidad, $con)
+{
+    $sql = $con->prepare("UPDATE productos SET stock = stock - ? WHERE id=?");
+    $sql->execute([$cantidad, $id]);
 }

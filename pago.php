@@ -1,20 +1,23 @@
 <?php
 
-require_once 'config/config.php';
-require_once 'config/database.php';
-$db = new Database();
-$con = $db->conectar();
+/**
+ * Pantalla para realizar pago
+ * Adrian Guillen
+ * 22310361
+ */
+
+require 'config/config.php';
 
 $productos = isset($_SESSION['carrito']['productos']) ? $_SESSION['carrito']['productos'] : null;
 
-//print_r($_SESSION);
+$db = new Database();
+$con = $db->conectar();
 
 $lista_carrito = array();
 
 if ($productos != null) {
-    foreach ($productos as $clave => $cantidad) {
-
-        $sql = $con->prepare("SELECT id, nombre, precio, descuento, $cantidad AS cantidad FROM productos WHERE id=? AND activo=1");
+    foreach ($productos as $clave => $producto) {
+        $sql = $con->prepare("SELECT id, nombre, precio, descuento, $producto AS cantidad FROM productos WHERE id=? AND activo=1");
         $sql->execute([$clave]);
         $lista_carrito[] = $sql->fetch(PDO::FETCH_ASSOC);
     }
@@ -22,7 +25,6 @@ if ($productos != null) {
     header("Location: index.php");
     exit;
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="es" class="h-100">
@@ -38,6 +40,7 @@ if ($productos != null) {
     <link href="css/all.min.css" rel="stylesheet">
 
     <script src="https://www.paypal.com/sdk/js?client-id=<?php echo CLIENT_ID; ?>&currency=<?php echo CURRENCY; ?>"></script>
+    
 </head>
 
 <body class="d-flex flex-column h-100">

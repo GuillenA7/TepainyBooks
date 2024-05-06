@@ -1,15 +1,20 @@
 <?php
 
-require_once 'config/config.php';
-require_once 'config/database.php';
+/**
+ * Pantalla para mostrar el listado de productos en el carrito
+ * Adrian Guillen
+ * 22310361
+ */
+
+require 'config/config.php';
 
 $productos = isset($_SESSION['carrito']['productos']) ? $_SESSION['carrito']['productos'] : null;
 
 $db = new Database();
 $con = $db->conectar();
-
+ 
 $lista_carrito = array();
-
+ 
 if ($productos != null) {
     foreach ($productos as $clave => $producto) {
         $sql = $con->prepare("SELECT id, nombre, precio, descuento, $producto AS cantidad FROM productos WHERE id=? AND activo=1");
