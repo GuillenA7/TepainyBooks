@@ -16,6 +16,16 @@
                         <a href="#" class="nav-link">Soporte</a>
                     </li>
                 </ul>
+
+                <form method="get" action="catalogo.php" autocomplete="off">
+                    <div class="input-group pe-3">
+                        <input type="text" name="q" class="form-control" placeholder="Buscar..." aria-describedby="icon-buscar">
+                        <button class="btn btn-outline-info" type="submit" id="icon-buscar">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+
                 <a href="checkout.php" class="btn btn-primary me-2">
                     <i class="fas fa-shopping-cart"></i> Carrito <span id="num_cart" class="badge bg-secondary"><?php echo $num_cart; ?></span>
                 </a>

@@ -13,6 +13,7 @@ $con = $db->conectar();
 
 $idCategoria = $_GET['cat'] ?? '';
 $orden = $_GET['orden'] ?? '';
+$buscar = $_GET['q'] ?? '';
 
 $orders = [
     'asc' => 'nombre ASC',
@@ -24,25 +25,31 @@ $orders = [
 $order = $orders[$orden] ?? '';
 $params = [];
 
+$sql = "SELECT id, nombre, precio FROM productos WHERE activo=1";
+
+if (!empty($buscar)) {
+    $sql .= " AND (nombre LIKE ? OR descripcion LIKE ?)";
+    $params[] = "%$buscar%";
+    $params[] = "%$buscar%";
+}
+
 if (!empty($idCategoria)) {
-    $comando = $con->prepare("SELECT id, nombre, precio FROM productos WHERE activo=1 AND id_categoria = ? $order");
-    $comando->execute([$idCategoria]);
-} else {
-    $comando = $con->prepare("SELECT id, nombre, precio FROM productos WHERE activo=1 $order");
-    $comando->execute();
+    $sql .= " AND id_categoria = ?";
+    $params[] = $idCategoria;
 }
 
 if (!empty($order)) {
-    $order .= " ORDER BY $order";
+    $sql .= " ORDER BY $order";
 }
 
-$sql = $con->prepare("SELECT id, nombre, precio FROM productos WHERE activo=1");
-$sql->execute();
-$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+$query = $con->prepare($sql);
+$query->execute($params);
+$resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+$totalRegistros = count($resultado);
 
-$sqlCategorias = $con->prepare("SELECT id, nombre FROM categorias WHERE activo=1");
-$sqlCategorias->execute();
-$categorias = $sqlCategorias->fetchAll(PDO::FETCH_ASSOC);
+$categoriaSql = $con->prepare("SELECT id, nombre FROM categorias WHERE activo=1");
+$categoriaSql->execute();
+$categorias = $categoriaSql->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <!DOCTYPE html>
@@ -84,33 +91,62 @@ $categorias = $sqlCategorias->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                     </div>
                 </div>
+
                 <div class="col-12 col-md-9 col-lg-9">
                     <header class="d-sm-flex align-items-center border-bottom mb-4 pb-3">
-                <?php foreach($resultado as $row) { ?>
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <?php
-                                $id = $row['id'];
-                                $imagen = "images/productos/$id/principal.jpg";
+                        <strong class="d-block py-2"><?php echo $totalRegistros; ?> Artículos encontrados </strong>
+                        <div class="ms-auto">
+                            <form action="catalogo.php" id="ordenForm" method="get" onchange="submitForm()">
+                                <input type="hidden" id="cat" name="cat" value="<?php echo $idCategoria; ?>">
+                                <label for="cbx-orden" class="form-label">Ordena por</label>
 
-                                if (!file_exists($imagen)) {
-                                    $imagen = "images/no-photo.jpg";
-                                }
-                            ?>
-                            <img src="<?php echo $imagen; ?>">
-                            <div class="card-body">
-                                <p class="card-text"><?php echo $row['nombre']; ?></p>
-                                <h5 class="card-tittle">$<?php echo number_format($row['precio'], 2, '.', ','); ?></h5>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <a href="details.php?id=<?php echo $row['id']; ?>&token=<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN); ?>" class="btn btn-primary">Detalles</a>
+                                <select class="form-select d-inline-block w-auto pt-1 form-select-sm" name="orden" id="orden">
+                                    <option value="precio_alto" <?php echo ($orden === 'precio_alto') ? 'selected' : ''; ?>>Pecios más altos</option>
+                                    <option value="precio_bajo" <?php echo ($orden === 'precio_bajo') ? 'selected' : ''; ?>>Pecios más bajos</option>
+                                    <option value="asc" <?php echo ($orden === 'asc') ? 'selected' : ''; ?>>Nombre A-Z</option>
+                                    <option value="desc" <?php echo ($orden === 'desc') ? 'selected' : ''; ?>>Nombre Z-A</option>
+                                </select>
+                            </form>
+                        </div>
+                    </header>
+
+                    <div class="row">
+                        <?php foreach ($resultado as $row) { ?>
+                            <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
+                                <div class="card w-100 my-2 shadow-2-strong">
+
+                                    <?php
+                                    $id = $row['id'];
+                                    $imagen = "images/productos/$id/principal.jpg";
+
+                                    if (!file_exists($imagen)) {
+                                        $imagen = "images/no-photo.jpg";
+                                    }
+                                    ?>
+                                    <a href="details/<?php echo $row['id']; ?>">
+                                        <img src="<?php echo $imagen; ?>" class="img-thumbnail" style="max-height: 300px">
+                                    </a>
+
+                                    <div class="card-body d-flex flex-column">
+                                        <div class="d-flex flex-row">
+                                            <h5 class="mb-1 me-1"><?php echo MONEDA . ' ' . number_format($row['precio'], 2, '.', ','); ?></h5>
+                                        </div>
+                                        <p class="card-text"><?php echo $row['nombre']; ?></p>
                                     </div>
-                                    <a class="btn btn-success" onClick="addProducto(<?php echo $row['id']; ?>)">Agregar</a>
+
+                                    <div class="card-footer bg-transparent">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <a class="btn btn-success" onClick="addProducto(<?php echo $row['id']; ?>)">Agregar</a>
+                                            <div class="btn-group">
+                                                <a href="details/<?php echo $row['id']; ?>" class="btn btn-primary">Detalles</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php } ?>
                     </div>
-                <?php } ?>
+                </div>
             </div>
         </div>
     </main>
