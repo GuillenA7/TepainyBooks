@@ -6,10 +6,10 @@
  * 22310361
  */
 
-$path = dirname(__FILE__);
+$path = dirname(__FILE__) . DIRECTORY_SEPARATOR;
 
-require_once $path . '/database.php';
-require_once $path . '/../admin/clases/cifrado.php';
+require_once $path . 'database.php';
+//require_once $path . '../clases/cifrado.php';
 
 $db = new Database();
 $con = $db->conectar();

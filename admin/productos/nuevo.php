@@ -2,12 +2,11 @@
 
 /**
  * Pantalla para mostrar el formulario de nuevo registro
- * Autor: Marco Robles
- * Web: https://github.com/mroblesdev
+ * Adrian Guillen
+ * 22310361
  */
 
 require '../config/config.php';
-require '../config/database.php';
 
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
     header('Location: ../index.php');
@@ -32,7 +31,7 @@ require '../header.php';
     }
 </style>
 
-<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+<!--<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script> -->
 
 <main>
     <div class="container-fluid px-3">

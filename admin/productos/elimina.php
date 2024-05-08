@@ -6,7 +6,6 @@
  * 22310361
  */
 
-require '../config/database.php';
 require '../config/config.php';
 
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
@@ -19,7 +18,7 @@ $con = $db->conectar();
 
 $id = $_POST['id'];
 
-$sql = $con->prepare("UPDATE productos SET activo=0 WHERE id=?");
+$sql = $con->prepare("DELETE FROM productos WHERE id = ?");
 $sql->execute([$id]);
 
 header('Location: index.php');

@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Guarda el registro de categorías
+ * Guarda el registro de producto
  * Adrian Guillen
  * 22310361
  */
 
-require '../config/database.php';
 require '../config/config.php';
+require '../clases/adminFunciones.php';
 
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
     header('Location: ../index.php');
@@ -25,7 +25,7 @@ $stock = $_POST['stock'];
 $categoria = $_POST['categoria'];
 
 $sql = "INSERT INTO productos (nombre, descripcion, precio, descuento, stock, id_categoria, activo)
-VALUES (?, ?, ?, ?, ?, ?, ?, 1)";
+VALUES (?, ?, ?, ?, ?, ?, 1)";
 $stm = $con->prepare($sql);
 if ($stm->execute([$nombre, $descripcion, $precio, $descuento, $stock, $categoria])) {
     $id = $con->lastInsertId();

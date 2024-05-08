@@ -6,7 +6,6 @@
  * 22310361
  */
 
-require '../config/database.php';
 require '../config/config.php';
 require '../clases/adminFunciones.php';
 

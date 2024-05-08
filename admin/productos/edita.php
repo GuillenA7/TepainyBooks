@@ -6,8 +6,7 @@
  * 22310361
  */
 
- require '../config/database.php';
- require '../config/config.php';
+require '../config/config.php';
 
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
     header('Location: ../index.php');
@@ -56,7 +55,7 @@ require '../header.php';
     }
 </style>
 
-<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+<!--<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>-->
 
 <main>
     <div class="container-fluid px-3">

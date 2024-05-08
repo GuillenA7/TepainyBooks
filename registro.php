@@ -1,8 +1,13 @@
 <?php
 
-require_once 'config/config.php';
-require_once 'config/database.php';
-require_once 'clases/clienteFunciones.php';
+/**
+ * Pantalla para registro de cliente
+ * Adrian Guillen
+ * 22310361
+ */
+
+require 'config/config.php';
+require 'clases/clienteFunciones.php';
 
 $db = new Database();
 $con = $db->conectar();
@@ -40,13 +45,13 @@ if (!empty($_POST)) {
         $errors[] = "El correo electrónico $email ya existe";
     }
 
-    if (count($errors) == 0) {
+    if (empty($errors)) {
 
         $id = registraCliente([$nombres, $apellidos, $email, $telefono, $dni], $con);
 
         if ($id > 0) {
 
-            require_once 'clases/Mailer.php';
+            require 'clases/Mailer.php';
             $mailer = new Mailer();
             $token = generarToken();
             $pass_hash = password_hash($password, PASSWORD_DEFAULT);
@@ -55,7 +60,7 @@ if (!empty($_POST)) {
             if ($idUsuario > 0) {
 
                 $url = SITE_URL . 'activa_cliente.php?id=' . $idUsuario . '&token=' . $token;
-                $asunto = "Quiero hola";
+                $asunto = "Activar cuenta - Tienda online";
                 $cuerpo = "Estimado $nombres: <br> Para continuar con el proceso de registro es indispensable de clic en la siguiente liga <a href='$url'>Activar cuenta</a>";
 
                 if ($mailer->enviarEmail($email, $asunto, $cuerpo)) {

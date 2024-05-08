@@ -1,8 +1,18 @@
 <?php
 
-require_once 'config/config.php';
-require_once 'config/database.php';
-require_once 'clases/clienteFunciones.php';
+/**
+ * Pantalla para detalles de compra
+ * Adrian Guillen
+ * 22310361
+ */
+
+require 'config/config.php';
+require 'clases/clienteFunciones.php';
+
+if (!isset($_SESSION['token'])) {
+    header("Location: compras.php");
+    exit;
+}
 
 $token_session = $_SESSION['token'];
 $orden = $_GET['orden'] ?? null;

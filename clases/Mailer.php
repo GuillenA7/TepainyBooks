@@ -1,9 +1,9 @@
 <?php
-//
+
 /**
  * Clase para envio de correo electrónico
- * Autor: Marco Robles
- * Web: https://github.com/mroblesdev
+ * Adrian Guillen
+ * 22310361
  */
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -15,9 +15,9 @@ class Mailer
     public function enviarEmail($email, $asunto, $cuerpo)
     {
         require_once __DIR__ . '/../config/config.php';
-        require_once  __DIR__ . '/../phpmailer/src/PHPMailer.php';
-        require_once  __DIR__ . '/../phpmailer/src/SMTP.php';
-        require_once  __DIR__ . '/../phpmailer/src/Exception.php';
+        require  __DIR__ . '/../phpmailer/src/PHPMailer.php';
+        require  __DIR__ . '/../phpmailer/src/SMTP.php';
+        require  __DIR__ . '/../phpmailer/src/Exception.php';
 
         $mail = new PHPMailer(true);
 
@@ -43,14 +43,9 @@ class Mailer
 
             //Cuerpo del correo
             $mail->Body = mb_convert_encoding($cuerpo, 'ISO-8859-1', 'UTF-8');
-            $mail->setLanguage('es', '../phpmailer/language/phpmailer.lang.es.php');
 
             //Enviar correo
-            if($mail->send()){
-                return true;
-            } else {
-                return false;
-            }
+            return $mail->send();
         } catch (Exception $e) {
             echo "No se pudo enviar el mensaje. Error de envío: {$mail->ErrorInfo}";
             return false;

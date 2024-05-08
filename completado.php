@@ -1,25 +1,32 @@
 <?php
 
-require_once 'config/config.php';
-require_once 'config/database.php';
-$db = new Database();
-$con = $db->conectar();
+/**
+ * Script para mostrar los detalles del pago
+ * Adrian Guillen
+ * 22310361
+ */
 
-$id_transaccion = isset($_GET['key'] ? $_GET['key'] : 0);
+require 'config/config.php';
+
+$id_transaccion = isset($_GET['key']) ? $_GET['key'] : '';
 
 $error = '';
+
 if ($id_transaccion == '') {
-    $error = 'Error al procesar la peticion';
+    $error = 'Error al procesar la petición';
 } else {
 
+    $db = new Database();
+    $con = $db->conectar();
+
     $sql = $con->prepare("SELECT count(id) FROM compra WHERE id_transaccion=? AND (status=? OR status=?)");
-    $sql->execute([$id_transaccion, 'COMPLETED']);
+    $sql->execute([$id_transaccion, 'COMPLETED', 'approved']);
     if ($sql->fetchColumn() > 0) {
-            
+
         $sql = $con->prepare("SELECT id, fecha, email, total FROM compra WHERE id_transaccion=? AND (status=? OR status=?) LIMIT 1");
-        $sql->execute([$id_transaccion, 'COMPLETED']);
+        $sql->execute([$id_transaccion, 'COMPLETED', 'approved']);
         $row = $sql->fetch(PDO::FETCH_ASSOC);
-            
+
         $idCompra = $row['id'];
         $total = $row['total'];
         $fecha = $row['fecha'];
@@ -31,7 +38,6 @@ if ($id_transaccion == '') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es" class="h-100">
 
@@ -52,28 +58,27 @@ if ($id_transaccion == '') {
     <?php include 'menu.php'; ?>
 
     <!-- Contenido -->
-    <main>
+    <main class="flex-shrink-0">
         <div class="container">
-
-            <?php if(strlen($error) > 0) { ?>
+            <?php if (strlen($error) > 0) { ?>
                 <div class="row">
                     <div class="col">
                         <h3><?php echo $error; ?></h3>
                     </div>
                 </div>
-            
-                <?php } else { ?>
+
+            <?php } else { ?>
 
                 <div class="row">
                     <div class="col">
-                        <b>Folio de la compra: </b><?php echo $id_transaccion; ?><br>
-                        <b>Fecha de compra: </b><?php echo $fecha; ?><br>
-                        <b>Total: </b><?php echo MONEDA . number_format($total, 2, '.', ','); ?><br>
+                        <b>Folio de compra:</b> <?php echo $id_transaccion; ?><br>
+                        <b>Fecha de compra:</b> <?php echo $row['fecha']; ?><br>
+                        <b>Total:</b> <?php echo $row['total']; ?><br>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-6 col-sm-12">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -84,7 +89,7 @@ if ($id_transaccion == '') {
                             </thead>
                             <tbody>
                                 <?php while ($row_det = $sqlDet->fetch(PDO::FETCH_ASSOC)) {
-                                    $importe =  $row_det['precio'] * $row_det['cantidad']; ?>
+                                    $importe =  $row_det['cantidad'] * $row_det['precio']; ?>
                                     <tr>
                                         <td><?php echo $row_det['cantidad']; ?></td>
                                         <td><?php echo $row_det['nombre']; ?></td>
@@ -95,11 +100,15 @@ if ($id_transaccion == '') {
                         </table>
                     </div>
                 </div>
+
             <?php } ?>
         </div>
     </main>
 
     <?php include 'footer.php'; ?>
+
+    <!-- Option 1: Bootstrap Bundle with Pooper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 </body>
 

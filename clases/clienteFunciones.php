@@ -48,7 +48,7 @@ function registraCliente(array $datos, $con)
 
 function registraUsuario(array $datos, $con)
 {
-    $sql = $con->prepare("INSERT INTO usuarios (usuario, password, token, id_cliente) VALUES (?,?,?,?)");
+    $sql = $con->prepare("INSERT INTO usuarios (usuario, password, activacion, token, id_cliente) VALUES (?,?,1,?,?)");
     if ($sql->execute($datos)) {
         return true;
     }

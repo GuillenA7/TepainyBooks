@@ -31,10 +31,10 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                    <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
+                        <hr class="dropdown-divider" />
+                    </li>
+                    <li><a class="dropdown-item" href="<?php echo ADMIN_URL; ?>logout.php">Cerrar sesión</a></li>
                 </ul>
             </li>
         </ul>
@@ -44,7 +44,7 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <a class="nav-link" href="<?php echo ADMIN_URL; ?>configuracion">
+                        <!--<a class="nav-link" href="<?php echo ADMIN_URL; ?>configuracion">
                             <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>
                             Configuración
                         </a>
@@ -61,7 +61,7 @@
                         <a class="nav-link" href="<?php echo ADMIN_URL; ?>compras">
                             <div class="sb-nav-link-icon"><i class="fas fa-shopping-basket"></i></div>
                             Compras
-                        </a>
+                        </a>-->
                         <a class="nav-link" href="<?php echo ADMIN_URL; ?>productos">
                             <div class="sb-nav-link-icon"><i class="fas fa-gifts"></i></div>
                             Productos

@@ -6,7 +6,6 @@
  * 22310361
  */
 
-require '../config/database.php';
 require '../config/config.php';
 
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
