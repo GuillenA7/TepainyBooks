@@ -4,6 +4,7 @@
  * Pantalla para mostrar el listado de productos en el carrito
  * Adrian Guillen
  * 22310361
+ * hola
  */
 
 require 'config/config.php';
