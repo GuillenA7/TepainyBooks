@@ -17,6 +17,9 @@ if (isset($_POST['action'])) {
         $respuesta = agregar($id, $cantidad);
         if ($respuesta > 0) {
             $_SESSION['carrito']['productos'][$id] = $cantidad;
+
+            $_SESSION['carrito_pdf'] = $_SESSION['carrito'];
+
             $datos['ok'] = true;
         } else {
             $datos['ok'] = false;

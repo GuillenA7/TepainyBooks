@@ -60,16 +60,16 @@ $total = 0;
 
 // Check if the cart is defined
 if (isset($_SESSION['carrito'])) {
-    foreach ($_SESSION['carrito']['productos'] as $id => $producto) {
+    foreach ($_SESSION['carrito'] as $producto) {
         $pdf->Cell(40, 10, $producto['nombre'], 1, 0, 'L');
         $pdf->Cell(20, 10, '$' . $producto['precio'], 1, 0, 'L');
         $pdf->Cell(20, 10, $producto['cantidad'], 1, 0, 'L');
 
-        $iva = $producto['subtotal'] * 0.16;
+        $subtotal = $producto['precio'] * $producto['cantidad'];
 
-        $pdf->Cell(25, 10, '$' . $producto['subtotal'], 1, 1, 'L');
+        $pdf->Cell(25, 10, '$' . $subtotal, 1, 1, 'L');
 
-        $total += $producto['subtotal'];
+        $total += $subtotal;
     }
 
     $sub = $total;
@@ -97,6 +97,8 @@ $msg = 'Se adjuntan los detalles de su compra en Grubi';
 $file = $title . ".pdf";
 $attachment = chunk_split(base64_encode(file_get_contents($file)));
 $boundary = md5(date('r', time()));
+header("Location: index.php");
+$_SESSION['carrito'] = [];
 
 $headers = "From: TB \r\n";
 $headers .= "MIME-Version: 1.0\r\n";

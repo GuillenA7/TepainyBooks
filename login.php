@@ -1,8 +1,13 @@
 <?php
 
-require_once 'config/config.php';
-require_once 'config/database.php';
-require_once 'clases/clienteFunciones.php';
+/**
+ * Pantalla para login de cliente
+ * Adrian Guillen
+ * 22310361
+ */
+
+require 'config/config.php';
+require 'clases/clienteFunciones.php';
 
 $db = new Database();
 $con = $db->conectar();
