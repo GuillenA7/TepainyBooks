@@ -27,7 +27,7 @@ require '../header.php';
     <div class="container-fluid px-3">
         <h3 class="mt-2">Productos</h3>
 
-        <a class="btn btn-primary" href="nuevo.php">Agregar</a>
+        <a class="btn" href="nuevo.php">Agregar</a>
 
         <hr>
 
@@ -50,12 +50,12 @@ require '../header.php';
                         <td><?php echo $producto['stock']; ?></td>
                         <td>
                             <a href="edita.php?id=<?php echo $producto['id'] ?>" class="btn btn-warning btn-sm">
-                                <i class="fas fa-pen"></i> Editar
+                                <i class="fas fa-pen"></i>
                             </a>
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#eliminaModal" data-bs-id="<?php echo $producto['id']; ?>">
-                                <i class="fas fa-trash"></i> Eliminar
+                                <i class="fas fa-trash"></i>
                             </button>
                         </td>
                     </tr>

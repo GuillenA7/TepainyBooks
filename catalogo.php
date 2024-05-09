@@ -83,11 +83,11 @@ $categorias = $categoriaSql->fetchAll(PDO::FETCH_ASSOC);
 
                         <div class="list-group">
                             <a href="catalogo.php" class="list-group-item list-group-item-action">TODO</a>
-                            <?php foreach ($categorias as $categoria) { ?>
+                            <!--<?php foreach ($categorias as $categoria) { ?>
                                 <a href="catalogo.php?cat=<?php echo $categoria['id']; ?>" class="list-group-item list-group-item-action <?php echo ($categoria['id'] == $idCategoria) ? 'active' : ''; ?>">
                                     <?php echo $categoria['nombre']; ?>
                                 </a>
-                            <?php } ?>
+                            <?php } ?>-->
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@ $categorias = $categoriaSql->fetchAll(PDO::FETCH_ASSOC);
                         <strong class="d-block py-2"><?php echo $totalRegistros; ?> Artículos encontrados </strong>
                         <div class="ms-auto">
                             <form action="catalogo.php" id="ordenForm" method="get" onchange="submitForm()">
-                                <input type="hidden" id="cat" name="cat" value="<?php echo $idCategoria; ?>">
+                                <!--<input type="hidden" id="cat" name="cat" value="<?php echo $idCategoria; ?>">
                                 <label for="cbx-orden" class="form-label">Ordena por</label>
 
                                 <select class="form-select d-inline-block w-auto pt-1 form-select-sm" name="orden" id="orden">
@@ -105,7 +105,7 @@ $categorias = $categoriaSql->fetchAll(PDO::FETCH_ASSOC);
                                     <option value="precio_bajo" <?php echo ($orden === 'precio_bajo') ? 'selected' : ''; ?>>Pecios más bajos</option>
                                     <option value="asc" <?php echo ($orden === 'asc') ? 'selected' : ''; ?>>Nombre A-Z</option>
                                     <option value="desc" <?php echo ($orden === 'desc') ? 'selected' : ''; ?>>Nombre Z-A</option>
-                                </select>
+                                </select>-->
                             </form>
                         </div>
                     </header>
