@@ -76,9 +76,6 @@ if (isset($_SESSION['carrito'])) {
 
     $pdf->Cell(30, 10, 'TOTAL:', 0, 0, 'L');
     $pdf->Cell(0, 10, '$' . $total, 0, 1, 'L');
-
-    $pdf->Cell(30, 10, 'SUBTOTAL:', 0, 0, 'L');
-    $pdf->Cell(0, 10, '$' . $sub, 0, 1, 'L');
 } else {
     $pdf->Cell(0, 10, 'El carrito se encuentra vacio en estos momentos', 0, 1);
 }
@@ -93,7 +90,7 @@ $pdf->Output('F', $title . ".pdf");
 // Email configuration
 $to = $_SESSION['email'];
 $subject = $title;
-$msg = 'Se adjuntan los detalles de su compra en Grubi';
+$msg = 'Se adjuntan los detalles de su compra en TepainyBooks';
 $file = $title . ".pdf";
 $attachment = chunk_split(base64_encode(file_get_contents($file)));
 $boundary = md5(date('r', time()));
