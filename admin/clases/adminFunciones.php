@@ -124,3 +124,12 @@ function actualizaPassword($userId, $password, $con)
     }
     return false;
 }
+
+function actualizaPasswordAdmin($userId, $password, $con)
+{
+    $sql = $con->prepare("UPDATE admin SET password=?, token_password = '', password_request = 0 WHERE id = ?");
+    if ($sql->execute([$password, $userId])) {
+        return true;
+    }
+    return false;
+}
