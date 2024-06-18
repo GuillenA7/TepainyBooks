@@ -2,13 +2,11 @@
 
 /**
  * Pantalla para mostrar el formulario para modificar
- * Adrian Guillen
- * 22310361
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
-require '../config/database.php';
 require '../config/config.php';
-require '../header.php';
 
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
     header('Location: index.php');
@@ -23,6 +21,8 @@ $id = $_GET['id'];
 $sql = $con->prepare("SELECT id, nombre FROM categorias WHERE id = ? LIMIT 1");
 $sql->execute([$id]);
 $categoria = $sql->fetch(PDO::FETCH_ASSOC);
+
+require '../header.php';
 
 ?>
 <main>

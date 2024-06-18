@@ -2,13 +2,11 @@
 
 /**
  * Pantalla principal para mostrar el listado de categorías
- * Adrian Guillen
- * 22310361
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
-require '../config/database.php';
 require '../config/config.php';
-require '../header.php';
 
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
     header('Location: index.php');
@@ -21,6 +19,8 @@ $con = $db->conectar();
 $sql = "SELECT id, nombre FROM categorias WHERE activo = 1";
 $resultado = $con->query($sql);
 $categorias = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+require '../header.php';
 
 ?>
 <main>

@@ -1,9 +1,13 @@
 <?php
 
-require '../config/database.php';
+/**
+ * Pantalla para mostrar el formulario de configuraciones
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
+ */
+
 require '../config/config.php';
-require '../header.php';
-require '../clases/cifrado.php';
+require '../../clases/cifrado.php';
 
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
     header('Location: ../index.php');
@@ -22,6 +26,8 @@ $config = [];
 foreach ($datos as $dato) {
     $config[$dato['nombre']] = $dato['valor'];
 }
+
+require '../header.php';
 
 ?>
 
@@ -142,4 +148,4 @@ foreach ($datos as $dato) {
 </main>
 
 
-<?php require_once '../footer.php'; ?>
+<?php require '../footer.php'; ?>

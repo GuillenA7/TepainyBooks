@@ -1,9 +1,13 @@
 <?php
 
-require '../config/database.php';
+/**
+ * Garda las configuraciones
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
+ */
+
 require '../config/config.php';
-require '../clases/cifrado.php';
-require '../header.php';
+require '../../clases/cifrado.php';
 
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
     header('Location: ../index.php');
@@ -20,7 +24,7 @@ $moneda = $_POST['moneda'];
 $smtp = $_POST['smtp'];
 $puerto = $_POST['puerto'];
 $email = $_POST['email'];
-$password = $cifrar($_POST['password']);
+$password = $_POST['password'];
 
 $paypal_cliente = $_POST['paypal_cliente'];
 $paypal_moneda = $_POST['paypal_moneda'];
@@ -52,13 +56,15 @@ if ($passwordBd != $password) {
     $sql->execute([$password, 'correo_password']);
 }
 
+include '../header.php';
+
 ?>
 
 <main>
     <div class="container-fluid px-4">
         <h2 class="mt-4">Configuración actualizada</h2>
 
-        <a class="btn btn-secondary" href="configuracion/index.php">Regresar</a>
+        <a class="btn btn-secondary" href="index.php">Regresar</a>
     </div>
 </main>
 

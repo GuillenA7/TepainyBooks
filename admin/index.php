@@ -2,8 +2,8 @@
 
 /**
  * Pantalla para login de administración
- * Adrian Guillen
- * 22310361
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
 require 'config/config.php';
@@ -35,7 +35,7 @@ if (!empty($_POST)) {
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="author" content="Adrian" />
+    <meta name="author" content="Adrian Guillen" />
     <title>Inicio de sesión - TepainyBooks</title>
     <link href="css/styles.css" rel="stylesheet" />
 
@@ -91,7 +91,7 @@ if (!empty($_POST)) {
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">
-                            <a>Adrian Guillen</a>
+                            <?php echo date('Y'); ?> &copy; <a href="https://github.com/GuillenA7">GuillenA7</a>
                         </div>
                     </div>
                 </div>

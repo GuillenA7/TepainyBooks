@@ -3,7 +3,7 @@
     * Copyright 2013-2023 Start Bootstrap
     * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-sb-admin/blob/master/LICENSE)
     */
-    // 
+// 
 // Scripts
 // 
 
@@ -23,4 +23,22 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     }
 
+    const datatablesSimple = document.getElementById('datatablesSimple');
+    if (datatablesSimple) {
+        let options = {
+            searchable: true,
+            perPage: 10,
+            labels: {
+                placeholder: "Buscar...",
+                searchTitle: "Buscar dentro de la tabla",
+                pageTitle: "Página {page}",
+                perPage: "registros por página",
+                noRows: "No se encontraron registros",
+                info: "Mostrando {start} a {end} de {rows} registros",
+                noResults: "Ningún resultado coincide con su consulta de búsqueda",
+            }
+
+        };
+        new simpleDatatables.DataTable(datatablesSimple, options);
+    }
 });

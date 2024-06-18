@@ -1,13 +1,12 @@
 <?php
 
 /**
- * Modifica el registro para categorías
- * Adrian Guillen
- * 22310361
+ * Elimina el registro para categorías (Dar de baja)
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
- require '../config/database.php';
- require '../config/config.php';
+require '../config/config.php';
 
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
     header('Location: index.php');

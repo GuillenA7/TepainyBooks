@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Funciones de utilidad para usuarios
- * Adrian Guillen
- * 22310361
+ * Funciones de utilidad para administración
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
-function esNulo(array $parametos)
+function esNulo($parametos)
 {
     foreach ($parametos as $parameto) {
         if (strlen(trim($parameto)) < 1) {
@@ -52,7 +52,7 @@ function mostrarMensajes($errors = [])
             echo '<li>' . $error . '</li>';
         }
         echo '<ul>';
-        echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button></div>';
+        echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
     }
 }
 
@@ -70,7 +70,6 @@ function validaToken($id, $token, $con)
     } else {
         $msg = "No existe el registro del cliente.";
     }
-
     return $msg;
 }
 
@@ -96,31 +95,31 @@ function login($usuario, $password, $con)
     return 'El usuario y/o contraseña son incorrectos';
 }
 
-function solicitaPassword($user_id, $con)
+function solicitaPassword($userId, $con)
 {
     $token = generarToken();
 
     $sql = $con->prepare("UPDATE usuarios SET token_password=?, password_request=1 WHERE id = ?");
-    if ($sql->execute([$token, $user_id])) {
+    if ($sql->execute([$token, $userId])) {
         return $token;
     }
     return null;
 }
 
-function verificaTokenRequest($user_id, $token, $con)
+function verificaTokenRequest($userId, $token, $con)
 {
     $sql = $con->prepare("SELECT id FROM usuarios WHERE id = ? AND token_password LIKE ? AND password_request=1 LIMIT 1");
-    $sql->execute([$user_id, $token]);
+    $sql->execute([$userId, $token]);
     if ($sql->fetchColumn() > 0) {
         return true;
     }
     return false;
 }
 
-function actualizaPassword($user_id, $password, $con)
+function actualizaPassword($userId, $password, $con)
 {
     $sql = $con->prepare("UPDATE usuarios SET password=?, token_password = '', password_request = 0 WHERE id = ?");
-    if ($sql->execute([$password, $user_id])) {
+    if ($sql->execute([$password, $userId])) {
         return true;
     }
     return false;

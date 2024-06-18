@@ -2,8 +2,8 @@
 
 /**
  * Actualiza un producto
- * Adrian Guillen
- * 22310361
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
 require '../config/config.php';
@@ -27,7 +27,7 @@ $categoria = $_POST['categoria'];
 
 $sql = "UPDATE productos SET nombre=?, descripcion=?, precio=?, descuento=?, stock=?, id_categoria=? WHERE id = ?";
 $stm = $con->prepare($sql);
-if ($stm->execute([$nombre, $descripcion, $precio, $descuento, $stock, $categoria, $id])) {
+if ($stm->execute([$$nombre, $descripcion, $precio, $descuento, $stock, $categoria, $id])) {
 
     // Subir imagen principal
     if ($_FILES['imagen_principal']['error'] == UPLOAD_ERR_OK) {

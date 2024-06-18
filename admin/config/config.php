@@ -2,8 +2,8 @@
 
 /**
  * Parametros para configuración
- * Adrian Guillen
- * 22310361
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
 $path = dirname(__FILE__) . DIRECTORY_SEPARATOR;
