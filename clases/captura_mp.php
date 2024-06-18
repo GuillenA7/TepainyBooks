@@ -1,7 +1,12 @@
 <?php
 
-require_once '../config/config.php';
-require_once '../config/database.php';
+/**
+ * Script para capturar detalles de pago de Mercado Pago
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
+ */
+
+require '../config/config.php';
 
 $db = new Database();
 $con = $db->conectar();
@@ -38,14 +43,16 @@ if ($idTransaccion != '') {
                 $precio_desc = $precio - (($precio * $descuento) / 100);
 
                 $sql = $con->prepare("INSERT INTO detalle_compra (id_compra, id_producto, nombre, cantidad, precio) VALUES(?,?,?,?,?)");
-                $sql->execute([$id, $row_prod['id'], $row_prod['nombre'], $cantidad, $precio_desc]);
+                if ($sql->execute([$id, $row_prod['id'], $row_prod['nombre'], $cantidad, $precio_desc])) {
+                    restarStock($row_prod['id'], $cantidad, $con);
+                }
             }
 
             $asunto = "Detalles de su pedido - Tienda online";
             $cuerpo = "<h4>Gracias por su compra</h4>";
             $cuerpo .= '<p>El ID de su compra es: <b>' . $idTransaccion . '</b></p>';
 
-            require_once 'Mailer.php';
+            require 'Mailer.php';
             $mailer = new Mailer();
             $mailer->enviarEmail($email, $asunto, $cuerpo);
         }
@@ -53,4 +60,10 @@ if ($idTransaccion != '') {
         unset($_SESSION['carrito']);
         header("Location: " . SITE_URL . "completado.php?key=" . $idTransaccion);
     }
+}
+
+function restarStock($id, $cantidad, $con)
+{
+    $sqlProd = $con->prepare("UPDATE productos SET stock = stock - ? WHERE id=?");
+    $sqlProd->execute([$cantidad, $id]);
 }

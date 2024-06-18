@@ -2,8 +2,8 @@
 
 /**
  * Script para capturar detalles de pago de Paypal
- * Adrian Guillen
- * 22310361
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
 require '../config/config.php';
@@ -17,9 +17,9 @@ $datos = json_decode($json, true);
 if (is_array($datos)) {
 
     $idCliente = $_SESSION['user_cliente'];
-    $sql = $con->prepare("SELECT email FROM clientes WHERE id=? AND estatus=1");
+    $sqlProd = $con->prepare("SELECT email FROM clientes WHERE id=? AND estatus=1");
     $sqlProd->execute([$idCliente]);
-    $row_cliente = $sql->fetch(PDO::FETCH_ASSOC);
+    $row_cliente = $sqlProd->fetch(PDO::FETCH_ASSOC);
 
     $status = $datos['details']['status'];
     $fecha = $datos['details']['update_time'];
@@ -40,10 +40,10 @@ if (is_array($datos)) {
 
         if ($productos != null) {
             foreach ($productos as $clave => $cantidad) {
-        
-                $sql = $con->prepare("SELECT id, nombre, precio, descuento FROM productos WHERE id=? AND activo=1");
-                $sql->execute([$clave]);
-                $row_prod = $sql->fetch(PDO::FETCH_ASSOC);
+
+                $sqlProd = $con->prepare("SELECT id, nombre, precio, descuento FROM productos WHERE id=? AND activo=1");
+                $sqlProd->execute([$clave]);
+                $row_prod = $sqlProd->fetch(PDO::FETCH_ASSOC);
 
                 $precio = $row_prod['precio'];
                 $descuento = $row_prod['descuento'];
@@ -55,20 +55,21 @@ if (is_array($datos)) {
                 }
             }
 
-            $asunto = "Detalles de su pedido - TepainyBooks";
+            $asunto = "Detalles de su pedido - Tienda online";
             $cuerpo = "<h4>Gracias por su compra</h4>";
             $cuerpo .= '<p>El ID de su compra es: <b>' . $idTransaccion . '</b></p>';
 
-            require_once 'Mailer.php';
+            require 'Mailer.php';
             $mailer = new Mailer();
             $mailer->enviarEmail($email, $asunto, $cuerpo);
         }
+
         unset($_SESSION['carrito']);
     }
 }
 
 function restarStock($id, $cantidad, $con)
 {
-    $sql = $con->prepare("UPDATE productos SET stock = stock - ? WHERE id=?");
-    $sql->execute([$cantidad, $id]);
+    $sqlProd = $con->prepare("UPDATE productos SET stock = stock - ? WHERE id=?");
+    $sqlProd->execute([$cantidad, $id]);
 }

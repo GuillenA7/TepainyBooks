@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 /**
  * Script para actualizar carrito de compas
- * Adrian Guillen
- * 22310361
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
 require '../config/config.php';
@@ -12,22 +12,19 @@ if (isset($_POST['action'])) {
     $action = $_POST['action'];
     $id = isset($_POST['id']) ? $_POST['id'] : 0;
 
-    if ($action == 'agregar') {
+    if ($action == 'eliminar') {
+        $datos['ok'] = eliminar($id);
+    } elseif ($action == 'agregar') {
         $cantidad = isset($_POST['cantidad']) ? $_POST['cantidad'] : 0;
         $respuesta = agregar($id, $cantidad);
         if ($respuesta > 0) {
             $_SESSION['carrito']['productos'][$id] = $cantidad;
-
-            $_SESSION['carrito_pdf'] = $_SESSION['carrito'];
-
             $datos['ok'] = true;
         } else {
             $datos['ok'] = false;
             $datos['cantidadAnterior'] = $_SESSION['carrito']['productos'][$id];
         }
         $datos['sub'] = MONEDA . number_format($respuesta, 2, '.', ',');
-    } else if($action == 'eliminar') {
-        $datos['ok'] = eliminar($id);
     } else {
         $datos['ok'] = false;
     }
@@ -36,6 +33,18 @@ if (isset($_POST['action'])) {
 }
 
 echo json_encode($datos);
+
+function eliminar($id)
+{
+    if ($id > 0) {
+        if (isset($_SESSION['carrito']['productos'][$id])) {
+            unset($_SESSION['carrito']['productos'][$id]);
+            return true;
+        }
+    } else {
+        return false;
+    }
+}
 
 function agregar($id, $cantidad)
 {
@@ -57,16 +66,4 @@ function agregar($id, $cantidad)
         }
     }
     return 0;
-}
-
-function eliminar($id)
-{
-    if ($id > 0) {
-        if (isset($_SESSION['carrito']['productos'][$id])) {
-            unset($_SESSION['carrito']['productos'][$id]);
-            return true;
-        }
-    } else {
-        return false;
-    }
 }

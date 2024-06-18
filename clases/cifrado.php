@@ -4,7 +4,7 @@
  * Funciones para cifrar y descifrar datos utilizando OpenSSL.
  *
  * @link https://github.com/GuillenA7
- * @author Jose Adrian Guillen Lamas
+ * @author GuillenA7
  */
 
 /**

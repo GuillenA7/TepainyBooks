@@ -2,8 +2,8 @@
 
 /**
  * Funciones de utilidad para usuarios
- * Adrian Guillen
- * 22310361
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
 function esNulo(array $parametos)
@@ -48,11 +48,11 @@ function registraCliente(array $datos, $con)
 
 function registraUsuario(array $datos, $con)
 {
-    $sql = $con->prepare("INSERT INTO usuarios (usuario, password, activacion, token, id_cliente) VALUES (?,?,1,?,?)");
+    $sql = $con->prepare("INSERT INTO usuarios (usuario, password, token, id_cliente) VALUES (?,?,?,?)");
     if ($sql->execute($datos)) {
-        return true;
+        return $con->lastInsertId();
     }
-    return false;
+    return 0;
 }
 
 function usuarioExiste($usuario, $con)

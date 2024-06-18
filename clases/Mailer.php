@@ -2,8 +2,8 @@
 
 /**
  * Clase para envio de correo electrónico
- * Adrian Guillen
- * 22310361
+ * Autor: Marco Robles
+ * Web: https://github.com/mroblesdev
  */
 
 use PHPMailer\PHPMailer\PHPMailer;

@@ -2,8 +2,8 @@
 
 /**
  * Script para agregar al carrito de compras
- * Adrian Guillen
- * 22310361
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
 require '../config/config.php';

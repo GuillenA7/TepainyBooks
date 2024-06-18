@@ -2,8 +2,8 @@
 
 /**
  * Script para validar si existe el usuario
- * Adrian Guillen
- * 22310361
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
 require_once '../config/database.php';
