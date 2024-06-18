@@ -2,14 +2,14 @@
 
 /**
  * Parametros para configuración
- * Adrian Guillen
- * 22310361
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
 $path = dirname(__FILE__) . DIRECTORY_SEPARATOR;
 
 require_once $path . 'database.php';
-//require_once $path . '../clases/cifrado.php';
+require_once $path . '../clases/cifrado.php';
 
 $db = new Database();
 $con = $db->conectar();
@@ -23,7 +23,6 @@ $config = [];
 foreach ($datosConfig as $datoConfig) {
     $config[$datoConfig['nombre']] = $datoConfig['valor'];
 }
-
 
 #--------------------------------------------------------------------
 # Configuración del sistema
@@ -51,7 +50,7 @@ define("METODO_CIFRADO", "aes-128-cbc");
 /**
  * Simbolo de moneda
  */
-define("MONEDA", $config["tienda_moneda"]);
+define("MONEDA", $config['tienda_moneda']);
 
 #--------------------------------------------------------------------
 # Configuración para Paypal
@@ -62,12 +61,22 @@ define("CURRENCY", $config['paypal_moneda']);
 define("KEY_TOKEN", "APR.wqc-354*");
 
 #--------------------------------------------------------------------
+# Configuración para Mercado Pago
+#--------------------------------------------------------------------
+define("TOKEN_MP", $config['mp_token']);
+define("PUBLIC_KEY_MP", $config['mp_clave']);
+define("LOCALE_MP", "es-MX");
+
+#--------------------------------------------------------------------
 # Datos para envio de correo electronico
 #--------------------------------------------------------------------
 define("MAIL_HOST", $config['correo_smtp']);
 define("MAIL_USER", $config['correo_email']);
-define("MAIL_PASS", $config['correo_password']);
+define("MAIL_PASS", descifrar($config['correo_password'], ['key' => KEY_CIFRADO, 'method' => METODO_CIFRADO]));
 define("MAIL_PORT", $config['correo_puerto']);
+
+// Destruir variable
+unset($config);
 
 // Sesión para tienda
 session_name('ecommerce_session');

@@ -2,8 +2,8 @@
 
 /**
  * Clase para conexión a base de datos
- * Adrian Guillen
- * 22310361
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
 class Database
