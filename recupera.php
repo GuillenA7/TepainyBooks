@@ -1,8 +1,13 @@
 <?php
 
-require_once 'config/config.php';
-require_once 'config/database.php';
-require_once 'clases/clienteFunciones.php';
+/**
+ * Pantalla para recuperar contraseña de cliente
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
+ */
+
+require 'config/config.php';
+require 'clases/clienteFunciones.php';
 
 $db = new Database();
 $con = $db->conectar();
@@ -34,12 +39,12 @@ if (!empty($_POST)) {
             $token = solicitaPassword($user_id, $con);
 
             if ($token !== null) {
-                require_once 'clases/Mailer.php';
+                require 'clases/Mailer.php';
                 $mailer = new Mailer();
 
                 $url = SITE_URL . 'reset_password.php?id=' . $user_id . '&token=' . $token;
 
-                $asunto = "Recuperar contraseña - TepainyBooks";
+                $asunto = "Recuperar password - Tienda online";
                 $cuerpo = "Estimado $nombres: <br> Si has solicitado el cambio de tu contraseña da clic en el siguiente link: <a href='$url'>$url</a>.";
                 $cuerpo .= "<br>Si no hiciste esta solicitud puedes ignorar este correo.";
 
@@ -67,8 +72,7 @@ if (!empty($_POST)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TepainyBooks</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="<?php echo SITE_URL; ?>css/bootstrap.min.css" rel="stylesheet">
     <link href="css/all.min.css" rel="stylesheet">
     <link href="css/estilos.css" rel="stylesheet">
 </head>
@@ -79,7 +83,7 @@ if (!empty($_POST)) {
 
     <!-- Contenido -->
     <main class="form-login m-auto">
-        <h3>¿Olvidaste tu contraseña?</h3>
+        <h3>Recuperar contraseña</h3>
 
         <?php mostrarMensajes($errors); ?>
 
@@ -91,7 +95,7 @@ if (!empty($_POST)) {
             </div>
 
             <div class="d-grid gap-3 col-12">
-                <button type="submit" class="btn btn-primary">Restablecer mi contraseña</button>
+                <button type="submit" class="btn btn-primary">Continuar</button>
             </div>
 
             <div class="col-12">
@@ -103,8 +107,7 @@ if (!empty($_POST)) {
 
     <?php include 'footer.php'; ?>
 
-    <!-- Option 1: Bootstrap Bundle with Pooper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="<?php echo SITE_URL; ?>js/bootstrap.bundle.min.js"></script>
 
 </body>
 

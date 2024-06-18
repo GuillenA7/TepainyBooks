@@ -2,8 +2,8 @@
 
 /**
  * Plantila de FPDF para genera reporte de compras
- * Autor: Marco Robles
- * Web: https://github.com/mroblesdev
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
 require 'fpdf.php';

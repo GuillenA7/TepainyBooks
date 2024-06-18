@@ -9,7 +9,7 @@
                     TepainyBooks
                 </p>
                 <p class="mt-1 text-white">
-                    <a target="_blank">Adrian Guillen</a>
+                    &copy; 2022 Copyright: <a href="https://github.com/GuillenA7" target="_blank" class="text-white">GuillenA7</a>
                 </p>
             </div>
             <!-- Grid column -->

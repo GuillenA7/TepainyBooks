@@ -2,8 +2,8 @@
 
 /**
  * Pantalla para registro de cliente
- * Adrian Guillen
- * 22310361
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
 require 'config/config.php';
@@ -86,23 +86,23 @@ if (!empty($_POST)) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TepainyBooks</title>
+    <title>Tienda en linea</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="<?php echo SITE_URL; ?>css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/all.min.css" rel="stylesheet">
     <link href="css/estilos.css" rel="stylesheet">
 </head>
 
 <body class="d-flex flex-column h-100">
-
+    
     <?php include 'menu.php'; ?>
 
     <!-- Contenido -->
     <main class="flex-shrink-0">
-        <div class="container p-3">
-        <h3>Datos del cliente</h3>
+        <div class="container">
+            <h3>Datos del cliente</h3>
 
-        <?php mostrarMensajes($errors); ?>
+            <?php mostrarMensajes($errors); ?>
 
             <form class="row g-3" action="registro.php" method="post" autocomplete="off">
                 <div class="col-md-6">
@@ -156,8 +156,7 @@ if (!empty($_POST)) {
 
     <?php include 'footer.php'; ?>
 
-    <!-- Option 1: Bootstrap Bundle with Pooper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="<?php echo SITE_URL; ?>js/bootstrap.bundle.min.js"></script>
 
     <script>
         let txtUsuario = document.getElementById('usuario')
@@ -210,6 +209,7 @@ if (!empty($_POST)) {
                     } else {
                         document.getElementById('validaUsuario').innerHTML = ''
                     }
+
                 })
         }
     </script>

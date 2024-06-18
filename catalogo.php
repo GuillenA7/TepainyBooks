@@ -2,8 +2,8 @@
 
 /**
  * Pantalla principal para mostrar el listado de productos
- * Adrian Guillen
- * 22310361
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
 require 'config/config.php';
@@ -25,7 +25,7 @@ $orders = [
 $order = $orders[$orden] ?? '';
 $params = [];
 
-$sql = "SELECT id, nombre, precio FROM productos WHERE activo=1";
+$sql = "SELECT id, slug, nombre, precio FROM productos WHERE activo=1";
 
 if (!empty($buscar)) {
     $sql .= " AND (nombre LIKE ? OR descripcion LIKE ?)";
@@ -61,8 +61,7 @@ $categorias = $categoriaSql->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TepainyBooks</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/all.min.css" rel="stylesheet">
     <link href="css/estilos.css" rel="stylesheet">
 </head>
@@ -82,12 +81,12 @@ $categorias = $categoriaSql->fetchAll(PDO::FETCH_ASSOC);
                         </div>
 
                         <div class="list-group">
-                            <a href="catalogo.php" class="list-group-item list-group-item-action">TODO</a>
-                            <!--<?php foreach ($categorias as $categoria) { ?>
-                                <a href="catalogo.php?cat=<?php echo $categoria['id']; ?>" class="list-group-item list-group-item-action <?php echo ($categoria['id'] == $idCategoria) ? 'active' : ''; ?>">
+                            <a href="index.php" class="list-group-item list-group-item-action">TODO</a>
+                            <?php foreach ($categorias as $categoria) { ?>
+                                <a href="index.php?cat=<?php echo $categoria['id']; ?>" class="list-group-item list-group-item-action <?php echo ($categoria['id'] == $idCategoria) ? 'active' : ''; ?>">
                                     <?php echo $categoria['nombre']; ?>
                                 </a>
-                            <?php } ?>-->
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -96,8 +95,8 @@ $categorias = $categoriaSql->fetchAll(PDO::FETCH_ASSOC);
                     <header class="d-sm-flex align-items-center border-bottom mb-4 pb-3">
                         <strong class="d-block py-2"><?php echo $totalRegistros; ?> Artículos encontrados </strong>
                         <div class="ms-auto">
-                            <form action="catalogo.php" id="ordenForm" method="get" onchange="submitForm()">
-                                <!--<input type="hidden" id="cat" name="cat" value="<?php echo $idCategoria; ?>">
+                            <form action="index.php" id="ordenForm" method="get" onchange="submitForm()">
+                                <input type="hidden" id="cat" name="cat" value="<?php echo $idCategoria; ?>">
                                 <label for="cbx-orden" class="form-label">Ordena por</label>
 
                                 <select class="form-select d-inline-block w-auto pt-1 form-select-sm" name="orden" id="orden">
@@ -105,7 +104,7 @@ $categorias = $categoriaSql->fetchAll(PDO::FETCH_ASSOC);
                                     <option value="precio_bajo" <?php echo ($orden === 'precio_bajo') ? 'selected' : ''; ?>>Pecios más bajos</option>
                                     <option value="asc" <?php echo ($orden === 'asc') ? 'selected' : ''; ?>>Nombre A-Z</option>
                                     <option value="desc" <?php echo ($orden === 'desc') ? 'selected' : ''; ?>>Nombre Z-A</option>
-                                </select>-->
+                                </select>
                             </form>
                         </div>
                     </header>
@@ -123,7 +122,7 @@ $categorias = $categoriaSql->fetchAll(PDO::FETCH_ASSOC);
                                         $imagen = "images/no-photo.jpg";
                                     }
                                     ?>
-                                    <a href="details/<?php echo $row['id']; ?>">
+                                    <a href="details/<?php echo $row['slug']; ?>">
                                         <img src="<?php echo $imagen; ?>" class="img-thumbnail" style="max-height: 300px">
                                     </a>
 
@@ -138,7 +137,7 @@ $categorias = $categoriaSql->fetchAll(PDO::FETCH_ASSOC);
                                         <div class="d-flex justify-content-between align-items-center">
                                             <a class="btn btn-success" onClick="addProducto(<?php echo $row['id']; ?>)">Agregar</a>
                                             <div class="btn-group">
-                                                <a href="details/<?php echo $row['id']; ?>" class="btn btn-primary">Detalles</a>
+                                                <a href="details/<?php echo $row['slug']; ?>" class="btn btn-primary">Detalles</a>
                                             </div>
                                         </div>
                                     </div>
@@ -153,8 +152,7 @@ $categorias = $categoriaSql->fetchAll(PDO::FETCH_ASSOC);
 
     <?php include 'footer.php'; ?>
 
-    <!-- Option 1: Bootstrap Bundle with Pooper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="<?php echo SITE_URL; ?>js/bootstrap.bundle.min.js"></script>
     <script>
         function addProducto(id) {
             var url = 'clases/carrito.php';

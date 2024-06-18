@@ -1,8 +1,13 @@
 <?php
 
-require_once 'config/config.php';
-require_once 'config/database.php';
-require_once 'clases/clienteFunciones.php';
+/**
+ * Pantalla para modificar contraseña
+ * AAutor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
+ */
+
+require 'config/config.php';
+require 'clases/clienteFunciones.php';
 
 $user_id = $_GET['id'] ?? $_POST['user_id'] ?? '';
 $token = $_GET['token'] ?? $_POST['token'] ?? '';
@@ -55,8 +60,7 @@ if (!empty($_POST)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TepainyBooks</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="<?php echo SITE_URL; ?>css/bootstrap.min.css" rel="stylesheet">
     <link href="css/all.min.css" rel="stylesheet">
     <link href="css/estilos.css" rel="stylesheet">
 </head>
@@ -97,8 +101,7 @@ if (!empty($_POST)) {
 
     <?php include 'footer.php'; ?>
 
-    <!-- Option 1: Bootstrap Bundle with Pooper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="<?php echo SITE_URL; ?>js/bootstrap.bundle.min.js"></script>
 
 </body>
 
