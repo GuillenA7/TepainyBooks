@@ -60,7 +60,7 @@ if (!empty($_POST)) {
             if ($idUsuario > 0) {
 
                 $url = SITE_URL . 'activa_cliente.php?id=' . $idUsuario . '&token=' . $token;
-                $asunto = "Activar cuenta - Tienda online";
+                $asunto = "Activar cuenta - TepainyBooks";
                 $cuerpo = "Estimado $nombres: <br> Para continuar con el proceso de registro es indispensable de clic en la siguiente liga <a href='$url'>Activar cuenta</a>";
 
                 if ($mailer->enviarEmail($email, $asunto, $cuerpo)) {
@@ -86,7 +86,7 @@ if (!empty($_POST)) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda en linea</title>
+    <title>TepainyBooks</title>
 
     <link href="<?php echo SITE_URL; ?>css/bootstrap.min.css" rel="stylesheet">
     <link href="css/all.min.css" rel="stylesheet">

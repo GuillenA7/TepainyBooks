@@ -58,8 +58,6 @@ define("MONEDA", $config['tienda_moneda']);
 define("CLIENT_ID", $config['paypal_cliente']);
 define("CURRENCY", $config['paypal_moneda']);
 
-define("KEY_TOKEN", "APR.wqc-354*");
-
 #--------------------------------------------------------------------
 # Configuración para Mercado Pago
 #--------------------------------------------------------------------

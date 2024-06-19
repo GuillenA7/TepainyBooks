@@ -7,13 +7,13 @@
  */
 
 require 'config/config.php';
-/**
-* // SDK de Mercado Pago
-* require __DIR__ .  '/vendor/autoload.php';
-* MercadoPago\SDK::setAccessToken(TOKEN_MP);
-* $preference = new MercadoPago\Preference();
-* $productos_mp = array();
-*/
+
+// SDK de Mercado Pago
+require __DIR__ .  '/vendor/autoload.php';
+MercadoPago\SDK::setAccessToken(TOKEN_MP);
+$preference = new MercadoPago\Preference();
+$productos_mp = array();
+
 $productos = isset($_SESSION['carrito']['productos']) ? $_SESSION['carrito']['productos'] : null;
 
 $db = new Database();
@@ -46,7 +46,7 @@ if ($productos != null) {
     <link href="css/all.min.css" rel="stylesheet">
 
     <script src="https://www.paypal.com/sdk/js?client-id=<?php echo CLIENT_ID; ?>&currency=<?php echo CURRENCY; ?>"></script>
-    <!--<script src="https://sdk.mercadopago.com/js/v2"></script>-->
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
 
 </head>
 
@@ -144,7 +144,7 @@ if ($productos != null) {
     );
     $preference->auto_return = "approved";
     $preference->binary_mode = true;
-    $preference->statement_descriptor = "STORE CDP";
+    $preference->statement_descriptor = "TepainyBooks";
     $preference->external_reference = "Reference_1234";
     $preference->save();
 
@@ -167,7 +167,7 @@ if ($productos != null) {
                         amount: {
                             value: <?php echo $total; ?>
                         },
-                        description: 'Compra tienda CDP'
+                        description: 'Compra TepainyBooks'
                     }]
                 });
             },

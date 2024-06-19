@@ -2,8 +2,8 @@
 
 /**
  * Pantalla para mostrar el formulario de nuevo registro
- * Adrian Guillen
- * 22310361
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
 require '../config/config.php';
@@ -31,7 +31,7 @@ require '../header.php';
     }
 </style>
 
-<!--<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script> -->
+<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 
 <main>
     <div class="container-fluid px-3">

@@ -44,7 +44,7 @@ if (!empty($_POST)) {
 
                 $url = SITE_URL . 'reset_password.php?id=' . $user_id . '&token=' . $token;
 
-                $asunto = "Recuperar password - Tienda online";
+                $asunto = "Recuperar password - TepainyBooks";
                 $cuerpo = "Estimado $nombres: <br> Si has solicitado el cambio de tu contraseña da clic en el siguiente link: <a href='$url'>$url</a>.";
                 $cuerpo .= "<br>Si no hiciste esta solicitud puedes ignorar este correo.";
 

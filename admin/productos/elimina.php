@@ -2,8 +2,8 @@
 
 /**
  * Elimina el registro de producto (Dar de baja)
- * Adrian Guillen
- * 22310361
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
 require '../config/config.php';
@@ -18,7 +18,7 @@ $con = $db->conectar();
 
 $id = $_POST['id'];
 
-$sql = $con->prepare("DELETE FROM productos WHERE id = ?");
+$sql = $con->prepare("UPDATE productos SET activo=0 WHERE id=?");
 $sql->execute([$id]);
 
 header('Location: index.php');

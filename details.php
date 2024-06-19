@@ -2,55 +2,55 @@
 
 /**
  * Pantalla individual para mostrar el producto
- * Adrian Guillen
- * 22310361
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
- require 'config/config.php';
+require 'config/config.php';
 
- $db = new Database();
- $con = $db->conectar();
- 
- $slug = isset($_GET['slug']) ? $_GET['slug'] : '';
- 
- if ($slug == '') {
-     echo 'Error al procesar la petición';
-     exit;
- }
- 
- $sql = $con->prepare("SELECT count(id) FROM productos WHERE slug=? AND activo=1");
- $sql->execute([$slug]);
- if ($sql->fetchColumn() > 0) {
- 
-     $sql = $con->prepare("SELECT id, nombre, descripcion, precio, descuento FROM productos WHERE slug=? AND activo=1");
-     $sql->execute([$slug]);
-     $row = $sql->fetch(PDO::FETCH_ASSOC);
-     $id = $row['id'];
-     $descuento = $row['descuento'];
-     $precio = $row['precio'];
-     $precio_desc = $precio - (($precio * $descuento) / 100);
-     $dir_images = 'images/productos/' . $id . '/';
- 
-     $rutaImg = $dir_images . 'principal.jpg';
- 
-     if (!file_exists($rutaImg)) {
-         $rutaImg = 'images/no-photo.jpg';
-     }
- 
-     $imagenes = array();
-     $dirint = dir($dir_images);
- 
-     while ($archivo = $dirint->read()) {
-         if ($archivo != 'principal.jpg' && (strpos($archivo, 'jpg') || strpos($archivo, 'jpeg'))) {
-             $image = $dir_images . $archivo;
-             $imagenes[] = $image;
-         }
-     }
- 
-     $dirint->close();
- }
- 
- ?>
+$db = new Database();
+$con = $db->conectar();
+
+$slug = isset($_GET['slug']) ? $_GET['slug'] : '';
+
+if ($slug == '') {
+    echo 'Error al procesar la petición';
+    exit;
+}
+
+$sql = $con->prepare("SELECT count(id) FROM productos WHERE slug=? AND activo=1");
+$sql->execute([$slug]);
+if ($sql->fetchColumn() > 0) {
+
+    $sql = $con->prepare("SELECT id, nombre, descripcion, precio, descuento FROM productos WHERE slug=? AND activo=1");
+    $sql->execute([$slug]);
+    $row = $sql->fetch(PDO::FETCH_ASSOC);
+    $id = $row['id'];
+    $descuento = $row['descuento'];
+    $precio = $row['precio'];
+    $precio_desc = $precio - (($precio * $descuento) / 100);
+    $dir_images = 'images/productos/' . $id . '/';
+
+    $rutaImg = $dir_images . 'principal.jpg';
+
+    if (!file_exists($rutaImg)) {
+        $rutaImg = 'images/no-photo.jpg';
+    }
+
+    $imagenes = array();
+    $dirint = dir($dir_images);
+
+    while ($archivo = $dirint->read()) {
+        if ($archivo != 'principal.jpg' && (strpos($archivo, 'jpg') || strpos($archivo, 'jpeg'))) {
+            $image = $dir_images . $archivo;
+            $imagenes[] = $image;
+        }
+    }
+
+    $dirint->close();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="es" class="h-100">
 

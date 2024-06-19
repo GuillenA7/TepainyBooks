@@ -55,7 +55,7 @@ if (is_array($datos)) {
                 }
             }
 
-            $asunto = "Detalles de su pedido - Tienda online";
+            $asunto = "Detalles de su pedido - TepainyBooks";
             $cuerpo = "<h4>Gracias por su compra</h4>";
             $cuerpo .= '<p>El ID de su compra es: <b>' . $idTransaccion . '</b></p>';
 

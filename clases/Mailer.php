@@ -2,8 +2,8 @@
 
 /**
  * Clase para envio de correo electrónico
- * Autor: Marco Robles
- * Web: https://github.com/mroblesdev
+ * Autor: Adrian Guillen
+ * Web: https://github.com/GuillenA7
  */
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -29,7 +29,7 @@ class Mailer
             $mail->SMTPAuth   = true;                          // Habilita la autenticación SMTP
             $mail->Username   = MAIL_USER;                     //Usuario SMTP
             $mail->Password   = MAIL_PASS;                     //Contraseña SMTP
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //Habilitar el cifrado TLS
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; //Habilitar el cifrado TLS
             $mail->Port       = MAIL_PORT;                     //Puerto TCP al que conectarse, si usa 587 agregar `SMTPSecure = PHPMailer :: ENCRYPTION_STARTTLS`
 
             //Correo emisor y nombre

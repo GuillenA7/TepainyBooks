@@ -10,14 +10,11 @@
             <div class="collapse navbar-collapse" id="navBarTop">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="catalogo.php">Catalogo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Soporte</a>
+                        <a class="nav-link active" href="index.php">Catalogo</a>
                     </li>
                 </ul>
 
-                <form method="get" action="catalogo.php" autocomplete="off">
+                <form method="get" action="index.php" autocomplete="off">
                     <div class="input-group pe-3">
                         <input type="text" name="q" class="form-control" placeholder="Buscar..." aria-describedby="icon-buscar">
                         <button class="btn btn-outline-info" type="submit" id="icon-buscar">
