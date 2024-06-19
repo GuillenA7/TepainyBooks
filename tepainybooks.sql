@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-06-2024 a las 07:48:45
+-- Tiempo de generación: 19-06-2024 a las 08:15:09
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -68,7 +68,17 @@ INSERT INTO `bitacora` (`id`, `accion`, `fecha_hora`, `usuario`, `sentencia`) VA
 (1, 'update', '2024-06-18 21:35:27', 'root@localhost', 'UPDATE productos SET nombre = \"Los Cuatro Acuerdos: Un libro de sabiduría tolteca\", ... WHERE id = 4'),
 (2, 'update', '2024-06-18 21:43:00', 'root@localhost', 'UPDATE productos SET nombre = \"Bluey. ¿Dónde está Bluey?\", ... WHERE id = 6'),
 (3, 'update', '2024-06-18 21:54:18', 'root@localhost', 'UPDATE productos SET nombre = \"Deja De Ser Tú\", ... WHERE id = 5'),
-(4, 'update', '2024-06-18 22:00:07', 'root@localhost', 'UPDATE productos SET nombre = \"Deja De Ser Tú: La mente crea la realidad\", ... WHERE id = 5');
+(4, 'update', '2024-06-18 22:00:07', 'root@localhost', 'UPDATE productos SET nombre = \"Deja De Ser Tú: La mente crea la realidad\", ... WHERE id = 5'),
+(5, 'update', '2024-06-19 00:06:15', 'root@localhost', 'UPDATE productos SET nombre = \"Los Cuatro Acuerdos: Un libro de sabiduría tolteca\", ... WHERE id = 4'),
+(6, 'update', '2024-06-19 00:06:25', 'root@localhost', 'UPDATE productos SET nombre = \"Deja De Ser Tú: La mente crea la realidad\", ... WHERE id = 5'),
+(7, 'update', '2024-06-19 00:06:27', 'root@localhost', 'UPDATE productos SET nombre = \"Bluey. ¿Dónde está Bluey?\", ... WHERE id = 6'),
+(8, 'update', '2024-06-19 00:07:34', 'root@localhost', 'UPDATE productos SET nombre = \"Los Cuatro Acuerdos: Un libro de sabiduría tolteca\", ... WHERE id = 4'),
+(9, 'update', '2024-06-19 00:12:49', 'root@localhost', 'UPDATE productos SET nombre = \"Los Cuatro Acuerdos: Un libro de sabiduría tolteca\", ... WHERE id = 4'),
+(10, 'update', '2024-06-19 00:13:34', 'root@localhost', 'UPDATE productos SET nombre = \"Deja De Ser Tú: La mente crea la realidad\", ... WHERE id = 5'),
+(11, 'update', '2024-06-19 00:14:20', 'root@localhost', 'UPDATE productos SET nombre = \"Bluey. ¿Dónde está Bluey?\", ... WHERE id = 6'),
+(12, 'update', '2024-06-19 00:14:49', 'root@localhost', 'UPDATE productos SET nombre = \"Los Cuatro Acuerdos: Un libro de sabiduría tolteca\", ... WHERE id = 4'),
+(13, 'update', '2024-06-19 00:14:49', 'root@localhost', 'UPDATE productos SET nombre = \"Deja De Ser Tú: La mente crea la realidad\", ... WHERE id = 5'),
+(14, 'update', '2024-06-19 00:14:49', 'root@localhost', 'UPDATE productos SET nombre = \"Bluey. ¿Dónde está Bluey?\", ... WHERE id = 6');
 
 -- --------------------------------------------------------
 
@@ -141,7 +151,9 @@ CREATE TABLE `compra` (
 INSERT INTO `compra` (`id`, `id_transaccion`, `fecha`, `status`, `email`, `id_cliente`, `total`, `medio_pago`) VALUES
 (1, '8S53475734486115A', '2024-06-18 23:22:09', 'COMPLETED', 'adrianguillen2004@gmail.com', '1', 539.10, 'paypal'),
 (2, '10791941EM933804P', '2024-06-19 04:12:08', 'COMPLETED', 'adrianguillen2004@gmail.com', '1', 11400.00, 'paypal'),
-(3, '2AJ26466A1682911Y', '2024-06-19 04:51:20', 'COMPLETED', 'adrianguillen2004@gmail.com', '1', 643.95, 'paypal');
+(3, '2AJ26466A1682911Y', '2024-06-19 04:51:20', 'COMPLETED', 'adrianguillen2004@gmail.com', '1', 643.95, 'paypal'),
+(4, '2FF29292AP9557822', '2024-06-19 08:07:34', 'COMPLETED', 'adrianguillen2004@gmail.com', '1', 643.95, 'paypal'),
+(5, '95C25274EW3875125', '2024-06-19 08:14:49', 'COMPLETED', 'adrianguillen2004@gmail.com', '1', 643.95, 'paypal');
 
 -- --------------------------------------------------------
 
@@ -196,7 +208,11 @@ INSERT INTO `detalle_compra` (`id`, `id_compra`, `id_producto`, `nombre`, `preci
 (2, 2, 2, 'Laptop 15.6\" con Windows 11', 11400.00, 1),
 (3, 3, 4, 'Los Cuatro Acuerdos: Un libro de sabiduría tolteca', 225.25, 1),
 (4, 3, 6, 'Bluey. ¿Dónde está Bluey?', 119.00, 1),
-(5, 3, 5, 'Deja De Ser Tú: La mente crea la realidad', 299.70, 1);
+(5, 3, 5, 'Deja De Ser Tú: La mente crea la realidad', 299.70, 1),
+(6, 4, 4, 'Los Cuatro Acuerdos: Un libro de sabiduría tolteca', 225.25, 1),
+(7, 5, 4, 'Los Cuatro Acuerdos: Un libro de sabiduría tolteca', 225.25, 1),
+(8, 5, 5, 'Deja De Ser Tú: La mente crea la realidad', 299.70, 1),
+(9, 5, 6, 'Bluey. ¿Dónde está Bluey?', 119.00, 1);
 
 -- --------------------------------------------------------
 
@@ -224,9 +240,9 @@ INSERT INTO `productos` (`id`, `slug`, `nombre`, `descripcion`, `precio`, `descu
 (1, 'h-bitos-at-micos', 'Hábitos Atómicos', '<p>HÁBITOS ATÓMICOS parte de una simple pero poderosa pregunta: ¿Cómo podemos vivir mejor? Sabemos que unos buenos hábitos nos permiten mejorar significativamente nuestra vida, pero con frecuencia nos desviamos del camino: dejamos de hacer ejercicio, comemos mal, dormimos poco, despilfarramos. ¿Por qué es tan fácil caer en los malos hábitos y tan complicado seguir los buenos? James Clear nos brinda fantásticas ideas basadas en investigaciones científicas, que le permiten revelarnos cómo podemos transformar pequeños hábitos cotidianos para cambiar nuestra vida y mejorarla. Esta guía pone al descubierto las fuerzas ocultas que moldean nuestro comportamiento —desde nuestra mentalidad, pasando por el ambiente y hasta la genética— y nos demuestra cómo aplicar cada cambio a nuestra vida y a nuestro trabajo. Después de leer este libro, tendrás un método sencillo para desarrollar un sistema eficaz que te conducirá al éxito. Aprende cómo… Darte tiempo para desarrollar nuevos hábitos Superar la falta de motivación y de fuerza de voluntad Diseñar un ambiente para que el éxito sea fácil de alcanzar Regresar al buen camino cuando te hayas desviado un poco</p>', 398.00, 0, 999, 1, 0),
 (2, 'el-poder-del-ahora', 'El poder del ahora', '<p>El clásico que consagró a Eckhart Tolle como uno de los gurús más importantes del mundo. El poder del ahora es un libro único. Tiene la capacidad de crear una experiencia en los lectores y de cambiar su vida. Hoy ya es considerado una obra maestra. Su autor, Eckhart Tolle, se convirtió en un maestro universal, un gran espíritu con un gran mensaje: se puede alcanzar un estado de iluminación aquí y ahora. Es posible vivir libre del sufrimiento, de la ansiedad y de la neurosis. Para lograrlo sólo tenemos que comprender nuestro papel de creadores de nuestro dolor. Es nuestra propia mente la que causa nuestros problemas con su corriente constante de pensamientos, aferrándose al pasado, preocupándose por el futuro. Cometemos el error de identificarnos con ella, de pensar que eso es lo que somos, cuando de hecho somos seres mucho más grandes. Escrito en un formato de preguntas y respuestas que lo hace muy accesible, El poder del ahora es una invitación a la reflexión, que le abrirá las puertas a la plenitud espiritual y le permitirá verla vida con nuevos ojos y empezar a disfrutar del verdadero poder del ahora.</p>', 429.00, 59, 999, 1, 0),
 (3, 'el-principito', 'El Principito', '<p>Pocas historias son tan universalmente leídas y apreciadas tanto por niños como adultos por igual como El Principito. Esta obra, que ha capturado los corazones de los lectores de todas las edades, es un cuento poético que viene acompañado de ilustraciones hechas con acuarelas por el mismo Saint-Exupéry. En él, un piloto se encuentra perdido en el desierto del Sahara después de que su avión sufriera una avería, pero para su sorpresa, es ahí donde conoce a un pequeño príncipe proveniente de otro planeta, y que lo enfrentará a muchos mundos que son su propio mundo.<br>A pesar de que es considerado un libro infantil por la forma en la que se encuentra escrito, también posee observaciones profundas sobre la vida y la naturaleza humanas.</p>', 62.00, 0, 1000, 2, 0),
-(4, 'los-cuatro-acuerdos-un-libro-de-sabidur-a-tolteca', 'Los Cuatro Acuerdos: Un libro de sabiduría tolteca', '<p>El conocimiento tolteca surge de la misma unidad esencial de la verdad de la que parten todas las tradiciones esotéricas sagradas del mundo. Aunque no es una religión, respeta a todos los maestros espirituales que han enseñado en la tierra, y si bien abraza el espíritu, resulta más preciso describirlo como una manera de vivir que se distingue por su fácil acceso a la felicidad y el amor. El doctor Miguel Ruiz nos propone en este libro un sencillo procedimiento para eliminar todas aquellas creencias heredadas que nos limitan y substituirlas por otras que responden a nuestra realidad interior y nos conducen a la libertad. Hace miles de años los toltecas eran conocidos en todo el sur de México como «mujeres y hombres de conocimiento». Los antropólogos han definido a los toltecas como una nación o una raza, pero de hecho, eran científicos y artistas que formaron una sociedad para estudiar y conservar el conocimiento espiritual y las prácticas de sus antepasados. La conquista europea, unida a un agresivo abuso del poder personal por parte de algunos aprendices, hizo que los naguales se vieran forzados a esconder su sabiduría ancestral y a mantener su existencia en la oscuridad. Por fortuna, el conocimiento esotérico tolteca fue conservado y transmitido de una generación a otra por distintos linajes de naguales. Ahora, el doctor Miguel Ruiz, un nagual del linaje de los Guerreros del Águila, comparte con nosotros las profundas enseñanzas de los toltecas.</p>', 265.00, 15, 1000, 3, 1),
-(5, 'deja-de-ser-t-la-mente-crea-la-realidad', 'Deja De Ser Tú: La mente crea la realidad', '<p><strong>Joe Dispenza</strong> saltó a la fama en nuestro país tras participar en la película ¿Y tú qué sabes?, un documental sobre la sobrecogedora capacidad de la mente para transformar la realidad que corrió de mano en mano sin ninguna publicidad, gracias al boca oreja.</p><p>Ahora, el popularísimo científico y autor de Desarrolla tu cerebro profundiza en todos aquellos temas que tanto nos cautivaron -física cuántica, neurociencia, biología y genética- para enseñarnos a reprogramar el cerebro y ampliar nuestro marco de realidad.</p><p>El resultado es un método práctico de trasformación para crear prosperidad y riqueza, pero también un viaje prodigioso a un nuevo estado de conciencia.</p>', 370.00, 19, 999, 1, 1),
-(6, 'bluey-d-nde-est-bluey', 'Bluey. ¿Dónde está Bluey?', '<p><strong>¿Has visto a BLUEY y a BINGO?</strong></p><p>También hay muchas más cosas ocultas, ¡así que únete a la diversión en este libro de busca y encuentra!</p>', 119.00, 0, 1000, 2, 1);
+(4, 'los-cuatro-acuerdos-un-libro-de-sabidur-a-tolteca', 'Los Cuatro Acuerdos: Un libro de sabiduría tolteca', '<p>El conocimiento tolteca surge de la misma unidad esencial de la verdad de la que parten todas las tradiciones esotéricas sagradas del mundo. Aunque no es una religión, respeta a todos los maestros espirituales que han enseñado en la tierra, y si bien abraza el espíritu, resulta más preciso describirlo como una manera de vivir que se distingue por su fácil acceso a la felicidad y el amor. El doctor Miguel Ruiz nos propone en este libro un sencillo procedimiento para eliminar todas aquellas creencias heredadas que nos limitan y substituirlas por otras que responden a nuestra realidad interior y nos conducen a la libertad. Hace miles de años los toltecas eran conocidos en todo el sur de México como «mujeres y hombres de conocimiento». Los antropólogos han definido a los toltecas como una nación o una raza, pero de hecho, eran científicos y artistas que formaron una sociedad para estudiar y conservar el conocimiento espiritual y las prácticas de sus antepasados. La conquista europea, unida a un agresivo abuso del poder personal por parte de algunos aprendices, hizo que los naguales se vieran forzados a esconder su sabiduría ancestral y a mantener su existencia en la oscuridad. Por fortuna, el conocimiento esotérico tolteca fue conservado y transmitido de una generación a otra por distintos linajes de naguales. Ahora, el doctor Miguel Ruiz, un nagual del linaje de los Guerreros del Águila, comparte con nosotros las profundas enseñanzas de los toltecas.</p>', 265.00, 15, 998, 3, 1),
+(5, 'deja-de-ser-t-la-mente-crea-la-realidad', 'Deja De Ser Tú: La mente crea la realidad', '<p><strong>Joe Dispenza</strong> saltó a la fama en nuestro país tras participar en la película ¿Y tú qué sabes?, un documental sobre la sobrecogedora capacidad de la mente para transformar la realidad que corrió de mano en mano sin ninguna publicidad, gracias al boca oreja.</p><p>Ahora, el popularísimo científico y autor de Desarrolla tu cerebro profundiza en todos aquellos temas que tanto nos cautivaron -física cuántica, neurociencia, biología y genética- para enseñarnos a reprogramar el cerebro y ampliar nuestro marco de realidad.</p><p>El resultado es un método práctico de trasformación para crear prosperidad y riqueza, pero también un viaje prodigioso a un nuevo estado de conciencia.</p>', 370.00, 19, 998, 1, 1),
+(6, 'bluey-d-nde-est-bluey', 'Bluey. ¿Dónde está Bluey?', '<p><strong>¿Has visto a BLUEY y a BINGO?</strong></p><p>También hay muchas más cosas ocultas, ¡así que únete a la diversión en este libro de busca y encuentra!</p>', 119.00, 0, 999, 2, 1);
 
 --
 -- Disparadores `productos`
@@ -350,7 +366,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -368,7 +384,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracion`
@@ -380,7 +396,7 @@ ALTER TABLE `configuracion`
 -- AUTO_INCREMENT de la tabla `detalle_compra`
 --
 ALTER TABLE `detalle_compra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
