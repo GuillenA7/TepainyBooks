@@ -62,6 +62,10 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-gifts"></i></div>
                             Productos
                         </a>
+                        <a class="nav-link" href="<?php echo ADMIN_URL; ?>bitacora">
+                            <div class="sb-nav-link-icon"><i class="fas fa-gifts"></i></div>
+                            Bitacora
+                        </a>
                     </div>
                 </div>
             </nav>
