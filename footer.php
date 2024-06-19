@@ -1,19 +1,17 @@
-<footer class="footer text-lg-start bg-primary bg-gradient mt-auto">
-    <div class="container text-md-start pt-2 pb-1">
-        <!-- Grid row -->
-        <div class="row mt-3">
-            <!-- Grid column -->
-            <div class="col-12 col-lg-3 col-sm-12 mb-2">
-                <!-- Content -->
-                <p class="text-white h3">
-                    TepainyBooks
-                </p>
-                <p class="mt-1 text-white">
-                    &copy; 2022 Copyright: <a href="https://github.com/GuillenA7" target="_blank" class="text-white">GuillenA7</a>
-                </p>
+<footer class="py-4 bg-light mt-auto">
+    <div class="container-fluid px-4">
+        <div class="d-flex align-items-center justify-content-between small">
+            <div class="text-muted">
+                <?php echo date('Y'); ?> &copy; <a href="https://github.com/GuillenA7">GuillenA7</a>
             </div>
-            <!-- Grid column -->
         </div>
-        <!-- Grid row -->
     </div>
 </footer>
+</div>
+</div>
+<script src="<?php echo SITE_URL; ?>js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+<script src="<?php echo ADMIN_URL; ?>js/scripts.js"></script>
+</body>
+
+</html>
