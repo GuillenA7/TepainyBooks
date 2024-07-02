@@ -9,7 +9,7 @@
                     TepainyBooks
                 </p>
                 <p class="mt-1 text-white">
-                    &copy; 4 Copyright: <a href="https://github.com/GuillenA7" target="_blank" class="text-white">GuillenA7</a>
+                    &copy; 2024 Copyright: <a href="https://github.com/GuillenA7" target="_blank" class="text-white">GuillenA7</a>
                 </p>
             </div>
             <!-- Grid column -->
